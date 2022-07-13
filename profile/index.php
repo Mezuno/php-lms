@@ -8,9 +8,8 @@ $userData = getUserDataById($_GET['id'], $db);
 
 ?>
 
-<div class="p20">
 
-<div class="profile">
+<div class="profile bg-w80p-mt70">
     <div class="profile__row">
 
         <div class="profile__column">
@@ -40,15 +39,14 @@ $userData = getUserDataById($_GET['id'], $db);
         <div class="profile__column">
             <p class="profile__name"><?= $userData['login'] ?>
              id<?= $userData['id'] ?><br></p>
-            <p class="profile__item">email: <?= $userData['email'] ?><br></p>
-            <p class="profile__item">role: <?= $userData['title_role'] ?><br></p>
+            <p class="profile__item">Почта: <?= $userData['email'] ?><br></p>
+            <p class="profile__item">Роль: <?= $userData['title_role'] ?><br></p>
         </div>        
 
     </div>
 </div>
 
 
-</div>
 
 <script>
     let fields = document.querySelectorAll('#avatar__input');

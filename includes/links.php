@@ -7,20 +7,20 @@ $connect_db_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/connect-db.php';
 $get_auth_user_data_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/get-auth-user-data.php';
 $logout_link = '/php-app/includes/logout.php';
 $pagination_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/pagination.php';
-$table_html_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/html/table-html.php';
-$pagination_html_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/html/pagination-html.php';
 $check_access_admin_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/check-access-admin.php';
 $cookie_error_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/cookie-error.php';
 
-// ---- END INCLUDES
+// ---- HTML ------------------------------------------------------------
+
+$table_header_html_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/html/table-header-html.php';
+$table_html_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/html/table-html.php';
+$pagination_html_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/html/pagination-html.php';
 
 // ---- FUNCTIONS -------------------------------------------------------
 
 $verify_function_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/reg/users/verification-function.php';
 $isset_not_empty_check_function = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/isset-not-empty-check-function.php';
 $get_user_data_by_id_function_link = $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/get-user-data-by-id-function.php';
-
-// ---- END FUNCTIONS
 
 // ---- CRUD -------------------------------------------------------------
 
@@ -49,9 +49,6 @@ $delete_user_link = '/php-app/crud/delete/users/';
 
 $main_css_link = '/php-app/css/style.css';
 
-// ---- END CSS
-
-
 // ---- REGISTER and AUTHIFICATION -----------------------------------------
 
 $reg_user_form_link = '/php-app/reg/users/';
@@ -59,11 +56,6 @@ $reg_user_link = '/php-app/reg/users/register-user.php';
 $auth_user_form_link = '/php-app/auth/users/';
 $auth_user_link = '/php-app/auth/users/login-user.php';
 
-// ---- END REGISTER and AUTHIFICATION
-
-
 // ---- PROFILE ------------------------------------------------------------
 
 $profile_user_link = '/php-app/profile/index.php';
-
-// ---- END PROFILE

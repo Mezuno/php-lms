@@ -3,9 +3,13 @@
 
     <td class="td-userdata">
         <?php if(file_exists($_SERVER['DOCUMENT_ROOT'].'/php-app/img/users/profile/avatar/'. $userData['id'] .'.jpg')): ?>
-        <img width="40px" height="40px" src="/php-app/img/users/profile/avatar/<?= $userData['id']; ?>.jpg?v=<?=time()?>" alt="">
+            <a href="/php-app/profile/?id=<?= $userData['id']?>">
+                <img class="td-img" src="/php-app/img/users/profile/avatar/<?= $userData['id']; ?>.jpg?v=<?=time()?>" alt="">
+            </a>
         <?php else: ?>
-        <img width="40px" height="40px" src="/php-app/img/users/profile/avatar/default.jpg" alt="">
+            <a href="/php-app/profile/?id=<?= $userData['id']?>">
+                <img class="td-img" src="/php-app/img/users/profile/avatar/default.jpg" alt="">
+            </a>
         <?php endif ?>
     </td>
 

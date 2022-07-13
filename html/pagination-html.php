@@ -33,11 +33,13 @@
 
 
 	<form action="/php-app/">
-		<input class="input-lists-count" type="number" placeholder="Кол-во записей на странице" name="paginationStep">
+		<p class="pagination-input-description">Кол-во записей на странице: </p>
+		<input class="input-lists-count" type="number" max="100" name="paginationStep">
 		<button class="rounded-button" type="submit">Установить</button>
 	</form>
 	<form action="/php-app/">
-		<input class="input-lists-number" type="number" placeholder="Cтраница" name="list">
+		<p class="pagination-input-description">Cтраница: </p>
+		<input class="input-lists-number" type="number" name="list">
 		<button class="rounded-button" type="submit">Перейти</button>
 	</form>
 </div>
