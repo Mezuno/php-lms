@@ -201,7 +201,9 @@ a i {
 	background-color: rgba(24,36,48,0.9);
 	color: white;
 }
-
+input[name="password"], input[name="passwordRepeat"]  {
+	-webkit-text-security: disc !important;
+}
 .rounded-button {
 	width: fit-content;
 	cursor: pointer;
@@ -210,7 +212,7 @@ a i {
 	color: white !important;
 	border-radius: 10px;
 	transition: .4s;
-	background-color: rgba(24,36,48,1);
+	background-color: rgb(38, 98, 158);
 }
 .rounded-button:hover {
 	background-color: #e0a38a;
@@ -290,7 +292,7 @@ img.td-img {
 	transition: .4s;
 }
 .td-img:hover {
-	transform: scale(1.2);
+	transform: scale(1.5);
 }
 
 a.add-button {
@@ -324,9 +326,6 @@ input {
 .login__button {
 	margin-left: 0;
 }
-.login__if {
-	margin-top: 15px;
-}
 .login__reglink {
 	margin-bottom: 15px;
 }
@@ -344,6 +343,8 @@ input {
 	background-color: rgba(36,36,36,1);
 	border-radius: 6px;
 	margin-bottom: 15px;
+	padding: 8px;
+	line-height: 1.5em;
 }
 .fading {
 	animation: ease;
@@ -364,6 +365,17 @@ input {
 	}
 }
 
+.success {
+	display: block;
+	position: absolute;
+	width: 60%;
+	padding: 10px;
+	border-radius: 6px;
+	background-color: #006600;
+	border: 1px solid #008800;
+	margin: -20px 20% 0;
+	animation: blink 5s ease forwards;
+}
 .error {
 	display: block;
 	position: absolute;
@@ -443,6 +455,8 @@ a.logo-link {
 	border-radius: 10px;
 	box-shadow: 0px 0px 30px #203040;
 	background-color: #ccc;
+
+	position: relative;
 }
 .profile__row {
 	display: flex;
@@ -458,8 +472,15 @@ a.logo-link {
 .profile__img {
     display: block;
 	margin: 0 auto;
-	height: 200px;
-	border-radius: 10px;
+	max-height: 400px;
+	max-width: 400px;
+	border-radius: 0px;
+
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	object-fit:cover;
 }
 .profile__name {
 	font-size: 30px;
@@ -483,12 +504,12 @@ a.logo-link {
 	overflow: hidden;
 	width: 200px;
 	height: 200px;
+	border-radius: 8px;
+	transition: .4s;
 }
-
-.profile__img_hover:hover {
+.profile__img-box:hover {
 	transform: scale(1.1);
 }
-
 .create-form {
 	margin-bottom: 10px;
 }

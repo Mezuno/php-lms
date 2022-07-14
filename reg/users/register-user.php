@@ -37,16 +37,12 @@
         session_start();
         $_SESSION['savedLoginToReg'] = $login;
         $_SESSION['savedEmailToReg'] = $email;
-        $_SESSION['savedPassToReg'] = $passsword;
-        $_SESSION['savedPassRepeatToReg'] = $passswordRepeat;
         setcookie('regError', $errorString, time()+5, '/php-app');
         header('Location: '.$reg_user_form_link);
     } else {
         session_start();
-        $_SESSION['savedLoginToReg'] = '';
-        $_SESSION['savedEmailToReg'] = '';
-        $_SESSION['savedPassToReg'] = '';
-        $_SESSION['savedPassRepeatToReg'] = '';
+        unset($_SESSION['savedLoginToReg']);
+        unset($_SESSION['savedEmailToReg']);
 
         $hash = md5(md5($login . time() . 'morzhikiikorzhiki'));
         $pass = md5(md5($password."yalublulipton"));

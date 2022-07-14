@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if (!isset($_SESSION['token'])) {
+	setcookie('error', 'Авторизуйся, чтобы ты хоть чего-то стоил на этом ресурсе', time()+1, '/php-app');
+	header('Location: /php-app/auth/users/');
+}
+
 $pageName = 'Главная страница';
 require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 require_once $pagination_link;

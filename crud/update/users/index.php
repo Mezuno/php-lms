@@ -5,10 +5,18 @@ require_once $connect_db_link;
 require_once $verify_function_link;
 require_once $get_auth_user_data_link;
 require_once $get_user_data_by_id_function_link;
-require_once $check_access_admin_link;
 
 
 extract($_POST);
+
+if (!isset($id) || empty($id)) {
+	header('Location: /php-app');
+}
+
+if($authUserData['id'] != $id) {
+	require_once $check_access_admin_link;
+}
+
 
 if ($_POST['submit']) {
 
@@ -19,6 +27,11 @@ if ($_POST['submit']) {
 		'passwordRepeat' => $passwordRepeat,
 	];
 
+	if ($password == '' && $passwordRepeat == '') {
+		unset($inputData['password']);
+		unset($inputData['passwordRepeat']);
+	}
+
 	foreach ($inputData as $key => $value) {
 		$errorsArray = verifyInputData($key, $inputData);
 		foreach ($errorsArray as $err) $errorString = $errorString.$err;
@@ -27,12 +40,16 @@ if ($_POST['submit']) {
 	$userDataFromDB = getUserDataById($id, $db);
 
 	if ($login != $userDataFromDB['login']) {
-		if ($db->query("SELECT 'id' FROM `users` WHERE `login` = '$login'")) {
+		$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `login` = '$login'");
+		$usersCount = $usersCountResult->fetch();
+		if ($usersCount['count(*)'] != 0) {
 			$errorString = $errorString.'Пользователь с таким логином уже существует<br><br>';
 		}
 	}
 	if ($email != $userDataFromDB['email']) {
-		if ($db->query("SELECT 'id' FROM `users` WHERE `email` = '$email'")) {
+		$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `email` = '$email'");
+		$usersCount = $usersCountResult->fetch();
+		if ($usersCount['count(*)'] != 0) {
 			$errorString = $errorString.'Пользователь с таким Email уже существует<br>';
 		}
 	}
@@ -59,10 +76,10 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 	<div class="p20-bg-rnd-container flex-col">
 
 	<form class="create-form" action="#" method="POST">
-		<input type="email" value="<?= $userDataFromDB['email'] ?>" name="email" placeholder="Email"><br>
-		<input type="text" value="<?= $userDataFromDB['login'] ?>" name="login" placeholder="Login"><br>
-		<input type="password" name="password" placeholder="Password" autocomplete="off"><br>
-		<input type="password" name="passwordRepeat" placeholder="Password repeat" autocomplete="off"><br>
+		<input type="email" value="<?= $email ?? $userDataFromDB['email'] ?>" name="email" placeholder="Email"><br>
+		<input type="text" value="<?= $login ?? $userDataFromDB['login'] ?>" name="login" placeholder="Login"><br>
+		<input type="text" name="password" placeholder="Password" autocomplete="off"><br>
+		<input type="text" name="passwordRepeat" placeholder="Password repeat" autocomplete="off"><br>
 		<input type="text" value="<?= $_POST['id'] ?>" name="id" hidden>
 		<input type="submit" name="submit" value="Обновить" class="rounded-button">
 	</form>
@@ -80,7 +97,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 	</div>
 
 
-		<a href="/php-app/" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
+		<a onclick="javascript:history.back(); return false;" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> Назад</a>
 
 	</div>
 </div>

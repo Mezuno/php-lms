@@ -31,7 +31,6 @@ if (checkEmpty($_POST['login'])) {
         
         if (!$authUserData) {
             $_SESSION["loginLogin"] = $_POST['login'];
-            $_SESSION["loginPassword"] = $_POST['password'];
             $logError = 'Неверный логин или пароль';
             setcookie('logError', $logError, time()+5, '/php-app');
             header('Location: '.$auth_user_form_link);
@@ -40,7 +39,6 @@ if (checkEmpty($_POST['login'])) {
             if (!empty($authUserData['token'])) {
                 $_SESSION["token"] = $authUserData['token'];
                 unset($_SESSION["loginLogin"]);
-                unset($_SESSION["loginPassword"]);
                 header('Location: /php-app/');
             } else {
 
@@ -49,7 +47,6 @@ if (checkEmpty($_POST['login'])) {
                 
                 $_SESSION["token"] = $token;
                 unset($_SESSION["loginLogin"]);
-                unset($_SESSION["loginPassword"]);
                 header('Location: /php-app/');
 
             }
@@ -61,6 +58,3 @@ if (checkEmpty($_POST['login'])) {
     }    
 
 }
-
-
- ?>

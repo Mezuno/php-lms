@@ -6,6 +6,8 @@ if (isset($_SESSION['token'])) header('Location: /php-app/');
 $pageName = 'Login';
 require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 
+include $cookie_error_link;
+
 ?>
 
 <?php if (!isset($_SESSION['token'])): ?>
@@ -18,10 +20,10 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
          type="text" id="login" name="login" placeholder="Логин" /><br>
         <input class="login__input mb20"  tabindex="2" value="<?php if(isset($_SESSION['loginPassword'])) echo $_SESSION['loginPassword'] ?>"
           type="password" id="password" name="password" placeholder="Пароль" /><br>
-        <input class="rounded-button login__button" tabindex="3" type="submit" name="logbtn" id="logbtn" value="Войти">
+        <input class="rounded-button mb20 login__button" tabindex="3" type="submit" name="logbtn" id="logbtn" value="Войти">
     </form>
 
-    <div id="message" class="red"><?php if (isset($_COOKIE['logError'])) echo $_COOKIE['logError']; ?></div>
+    <?php if (isset($_COOKIE['logError'])): ?><div id="message" class="red notification"><?= $_COOKIE['logError']; ?></div><?php endif ?>
 
     <p class="login__if">Не зарегестрированы?&nbsp</p>
     <a tabindex="4" class="login__reglink" href="<?= $reg_user_form_link ?>">Регистрация</a>

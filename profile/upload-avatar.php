@@ -8,8 +8,10 @@ require_once $connect_db_link;
 require_once $get_auth_user_data_link;
 
 $input_name = 'avatar';
- 
-$allow = array();
+
+$allow = array(
+	'png', 'jpg', 'jpeg'
+);
  
 $deny = array(
 	'phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'pl', 'asp', 
@@ -83,11 +85,17 @@ if (isset($_FILES[$input_name])) {
  
 			if (empty($name) || empty($parts['extension'])) {
 				$error = 'Недопустимое тип файла';
-			} elseif (!empty($allow) && !in_array(strtolower($parts['extension']), $allow)) {
+			}
+			if (!empty($allow) && !in_array(strtolower($parts['extension']), $allow)) {
 				$error = 'Недопустимый тип файла';
-			} elseif (!empty($deny) && in_array(strtolower($parts['extension']), $deny)) {
+			}
+			if (!empty($deny) && in_array(strtolower($parts['extension']), $deny)) {
 				$error = 'Недопустимый тип файла';
-			} else {
+			}
+			if (mime_content_type($_FILES[$input_name]['tmp_name']) != 'image/jpeg') {
+				$error = 'Недопустимый тип файла';
+			} 
+			if(empty($error)) {
 				
 				$i = 0;
 				$prefix = '';
@@ -97,27 +105,36 @@ if (isset($_FILES[$input_name])) {
 				$name = $parts['filename'] . $prefix . '.' . $parts['extension'];
 
 				if (move_uploaded_file($file['tmp_name'], $path . $name)) {
-					$success = 'Файл «' . $name . '» успешно загружен.';
+					$success = 'Фото успешно обновлено.';
 				} else {
 					$error = 'Не удалось загрузить файл.';
 				}
 			}
 		}
 
-		if (!empty($success)) {
-			echo '<p>' . $success . '</p>';		
-		} else {
-			echo '<p>' . $error . '</p>';
+
+		$oldAvatarPath = $db->query("SELECT avatar_path FROM users WHERE avatar_path IS NOT NULL AND id = '".$authUserData['id']."'")->fetch();
+
+
+		if ($oldAvatarPath['avatar_path'] != NULL && file_exists($oldAvatarPath['avatar_path'])) {
+			unlink($oldAvatarPath['avatar_path']);
 		}
 
-		if (rename($path.$name, $path.$authUserData['id'].'.jpg')) {
-			echo "Файл успешно переименован";
+		rename($path.$name, $path.md5($authUserData['id']).'.'.$parts['extension']);
+		$pathToUpload = '/php-app/img/users/profile/avatar/';
+		$pathToUploadDB = $pathToUpload.md5($authUserData['id']).'.'.$parts['extension'];
+		$db->query("UPDATE users SET `avatar_path` = '$pathToUploadDB' WHERE `id` = '".$authUserData['id']."'");
+
+
+
+		if (!empty($success)) {
+			setcookie('success', $success, time()+1, '/php-app');
+			header('Location: /php-app/profile/?id='.$authUserData['id']);
 		} else {
-			exit();
+			setcookie('error', $error, time()+1, '/php-app');
+			header('Location: /php-app/profile/?id='.$authUserData['id']);
 		}
 	}
-
 }
 
-header('Location: /php-app/profile/?id='.$authUserData['id']);
 ob_end_flush();
