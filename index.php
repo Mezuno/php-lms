@@ -20,9 +20,13 @@ include $cookie_error_link;
 
 		include $table_header_html_link;
 
-		include $get_all_users_link;
+		$resultQuery = $db->query("SELECT * FROM new_schema.users
+		INNER JOIN new_schema.roles ON users.roleid = roles.id_role
+		WHERE deleted_at IS NULL
+		ORDER BY id DESC
+		LIMIT ".(($_GET['list']-1)*$paginationStep).", $paginationStep");
 
-		while ($userData = $queryResult->fetch()) { require $table_html_link; }
+		while ($userData = $resultQuery->fetch()) { require $table_html_link; }
 
 	?>
 
