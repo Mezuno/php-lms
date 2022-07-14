@@ -16,16 +16,16 @@
 
 			<a class="red" href="/php-app/?list=<?= $_GET['list'] ?>"><?= $_GET['list'] ?></a>
 
-		<?php if(!($_GET['list']+2 > $usersCount['count(*)'] / $paginationStep)): ?>
+		<?php if ($_GET['list'] < $usersCount['count(*)'] / $paginationStep): ?>
 			<a href="/php-app/?list=<?= $_GET['list']+1 ?>"><?= $_GET['list']+1 ?></a>
 		<?php endif ?>
-		<?php if(!($_GET['list']+3 > $usersCount['count(*)'] / $paginationStep)): ?>
+		<?php if ($_GET['list']+1 < $usersCount['count(*)'] / $paginationStep): ?>
 			<a href="/php-app/?list=<?= $_GET['list']+2 ?>"><?= $_GET['list']+2 ?></a>
 		<?php endif ?>
-		<?php if(!($_GET['list']+4 > $usersCount['count(*)'] / $paginationStep)): ?>
+		<?php if ($_GET['list']+2 < $usersCount['count(*)'] / $paginationStep): ?>
 			<a href="/php-app/?list=<?= $_GET['list']+3 ?>"><?= $_GET['list']+3 ?></a>
 		<?php endif ?>
-		<?php if(!($_GET['list']+5 > $usersCount['count(*)'] / $paginationStep)): ?>
+		<?php if ($_GET['list']+3 < $usersCount['count(*)'] / $paginationStep): ?>
 			<a href="/php-app/?list=<?= $_GET['list']+4 ?>"><?= $_GET['list']+4 ?></a>
 		<?php endif ?>
 

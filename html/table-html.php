@@ -2,7 +2,7 @@
 <tr>
 
     <td class="td-userdata">
-        <?php if($userData['avatar_path'] != NULL): ?>
+        <?php if($userData['avatar_path'] != NULL && file_exists($_SERVER['DOCUMENT_ROOT'].$userData['avatar_path'])): ?>
             <a href="/php-app/profile/?id=<?= $userData['id']?>">
                 <img class="td-img" src="<?= $userData['avatar_path'] ?>?v=<?= time() ?>" alt="">
             </a>
@@ -30,6 +30,7 @@
     <?php if ($authUserData['id_role'] == 1): ?>
     <form action="<?= $delete_user_link ?>" method="POST">
         <input type="text" name="id" value="<?= $userData['id'] ?>" hidden>
+        <input type="text" name="list" value="<?= $_GET['list'] ?>" hidden>
         <button class="action-button red" type="submit"><i class="fa-solid fa-trash"></i></button>
     </form>
     <?php endif ?>

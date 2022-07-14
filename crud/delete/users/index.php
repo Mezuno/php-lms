@@ -4,6 +4,7 @@ extract($_POST);
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
 require_once $connect_db_link;
+require_once $pagination_link;
 
 if (!isset($_SESSION['token'])) {
 	setcookie('logError', 'Сначала авторизируйтесь.', time()+1, '/php-app');	
@@ -36,7 +37,7 @@ if ($authUserData['id_role'] != 1) {
 
 	}
 
-	header('Location: /php-app/');
+	header('Location: /php-app/?list='.$list);
 }
 
 	

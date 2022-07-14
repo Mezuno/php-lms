@@ -43,7 +43,7 @@ include $cookie_error_link;
 
             <?php else: ?>
                 <div class="profile__change-img-form">
-                    <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].$userData['avatar_path'])): ?>
+                    <?php if ($userData['avatar_path'] != NULL && file_exists($_SERVER['DOCUMENT_ROOT'].$userData['avatar_path'])): ?>
                         <div class="ptofile__img-box"><img class="profile__img" src="<?= $userData['avatar_path'] ?>?v=<?= time() ?>"></div>
                     <?php else: ?>
                         <div class="ptofile__img-box"><img class="profile__img" src="/php-app/img/users/profile/avatar/default.jpg" alt=""></div>

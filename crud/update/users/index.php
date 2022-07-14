@@ -75,7 +75,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 <div class="p20 flex-alit-center flex-just-center flex-row">
 	<div class="p20-bg-rnd-container flex-col">
 
-	<form class="create-form" action="#" method="POST">
+	<form class="create-form" action="" method="POST">
 		<input type="email" value="<?= $email ?? $userDataFromDB['email'] ?>" name="email" placeholder="Email"><br>
 		<input type="text" value="<?= $login ?? $userDataFromDB['login'] ?>" name="login" placeholder="Login"><br>
 		<input type="text" name="password" placeholder="Password" autocomplete="off"><br>
@@ -95,10 +95,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 		</div>
 	<?php endif ?>
 	</div>
-
-
 		<a onclick="javascript:history.back(); return false;" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> Назад</a>
-
 	</div>
 </div>
 

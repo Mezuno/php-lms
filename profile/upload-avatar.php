@@ -92,7 +92,9 @@ if (isset($_FILES[$input_name])) {
 			if (!empty($deny) && in_array(strtolower($parts['extension']), $deny)) {
 				$error = 'Недопустимый тип файла';
 			}
-			if (mime_content_type($_FILES[$input_name]['tmp_name']) != 'image/jpeg') {
+			if (mime_content_type($_FILES[$input_name]['tmp_name']) != 'image/jpeg'
+			&& mime_content_type($_FILES[$input_name]['tmp_name']) != 'image/jpg'
+			&& mime_content_type($_FILES[$input_name]['tmp_name']) != 'image/png') {
 				$error = 'Недопустимый тип файла';
 			} 
 			if(empty($error)) {

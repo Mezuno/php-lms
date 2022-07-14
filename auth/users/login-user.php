@@ -25,7 +25,7 @@ if (checkEmpty($_POST['login'])) {
         $password =  md5(md5($_POST['password'].'yalublulipton'));
         // $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
         
-        $resultQuery = $db->query("SELECT token FROM `users` WHERE `login` = '$login' AND `password` = '$password'");
+        $resultQuery = $db->query("SELECT token FROM `users` WHERE `login` = '$login' AND `password` = '$password' AND `deleted_at` IS NULL");
         $authUserData = $resultQuery->fetch();
         
         
