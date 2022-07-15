@@ -1,9 +1,8 @@
 <?php
 
-
 ob_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
 require_once $connect_db_link;
 require_once $get_auth_user_data_link;
 
@@ -114,27 +113,27 @@ if (isset($_FILES[$input_name])) {
 			}
 		}
 
-
 		$oldAvatarPath = $db->query("SELECT avatar_path FROM users WHERE avatar_path IS NOT NULL AND id = '".$authUserData['id']."'")->fetch();
 
-
-		if ($oldAvatarPath['avatar_path'] != NULL && file_exists($oldAvatarPath['avatar_path'])) {
-			unlink($oldAvatarPath['avatar_path']);
-		}
-
-		rename($path.$name, $path.md5($authUserData['id']).'.'.$parts['extension']);
-		$pathToUpload = '/php-app/img/users/profile/avatar/';
-		$pathToUploadDB = $pathToUpload.md5($authUserData['id']).'.'.$parts['extension'];
-		$db->query("UPDATE users SET `avatar_path` = '$pathToUploadDB' WHERE `id` = '".$authUserData['id']."'");
-
-
+		// if ($oldAvatarPath['avatar_path'] != NULL && file_exists($oldAvatarPath['avatar_path'])) {
+		// 	unlink($oldAvatarPath['avatar_path']);
+		// }
 
 		if (!empty($success)) {
-			setcookie('success', $success, time()+1, '/php-app');
-			header('Location: /php-app/profile/?id='.$authUserData['id']);
+			unlink($path.md5($authUserData['id']).'.png');
+			unlink($path.md5($authUserData['id']).'.jpeg');
+			unlink($path.md5($authUserData['id']).'.jpg');
+			
+			rename($path.$name, $path.md5($authUserData['id']).'.'.$parts['extension']);
+			$pathToUpload = '/img/users/profile/avatar/';
+			$pathToUploadDB = $pathToUpload.md5($authUserData['id']).'.'.$parts['extension'];
+			$db->query("UPDATE users SET `avatar_path` = '$pathToUploadDB' WHERE `id` = '".$authUserData['id']."'");
+
+			setcookie('success', $success, time()+1, '/');
+			header('Location: /users/'.$authUserData['id']);
 		} else {
-			setcookie('error', $error, time()+1, '/php-app');
-			header('Location: /php-app/profile/?id='.$authUserData['id']);
+			setcookie('error', $error, time()+1, '/');
+			header('Location: /users/'.$authUserData['id']);
 		}
 	}
 }

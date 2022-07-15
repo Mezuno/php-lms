@@ -1,16 +1,20 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
-require_once $connect_db_link;
-require_once $verify_function_link;
-require_once $get_auth_user_data_link;
-require_once $get_user_data_by_id_function_link;
+require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require $connect_db_link;
+require $verify_function_link;
+require $get_auth_user_data_link;
+require $get_user_data_by_id_function_link;
 
+$uri = $_SERVER['REQUEST_URI'];
+$parseUri = explode('/', $uri);
+
+$_POST['id'] = $parseUri[2];;
 
 extract($_POST);
 
 if (!isset($id) || empty($id)) {
-	header('Location: /php-app');
+	header('Location: /');
 }
 
 if($authUserData['id'] != $id) {
@@ -67,7 +71,7 @@ if ($_POST['submit']) {
 }
 
 $pageName = 'Изменение пользователя id'.($_POST['id']);
-require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 
 ?>
 
@@ -84,18 +88,22 @@ require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 		<input type="submit" name="submit" value="Обновить" class="rounded-button">
 	</form>
 
-	<div class="notification">
-	<?php if (!$changeSuccess && isset($changeSuccess)): ?>
-		<div class="red p8 fading">
-			<?= $errorString ?>
-		</div>
-	<?php elseif($changeSuccess): ?>
-		<div class="green p8 fading">
-			Пользователь под id<?= $userDataFromDB['id'] ?> успешно обновлён!
+
+	<?php if(isset($changeSuccess)): ?>
+		<div class="notification">
+			<?php if (!$changeSuccess): ?>
+				<div class="red p8 fading">
+					<?= $errorString ?>
+				</div>
+			<?php elseif($changeSuccess): ?>
+				<div class="green p8 fading">
+					Пользователь под id<?= $userDataFromDB['id'] ?> успешно обновлён!
+				</div>
+			<?php endif ?>
 		</div>
 	<?php endif ?>
-	</div>
-		<a onclick="javascript:history.back(); return false;" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> Назад</a>
+		<a href="/users/<?= $userDataFromDB['id'] ?>" class="rounded-button mb20"><i class="fa-solid fa-arrow-left"></i> В профиль</a>
+		<a href="/users" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> К списку</a>
 	</div>
 </div>
 

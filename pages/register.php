@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-if (isset($_SESSION['token'])) header('Location: /php-app/');
+if (isset($_SESSION['token'])) header('Location: /');
 
 $pageName = 'Register';
-require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
 require $header_link;
 
 ?>
@@ -28,7 +28,7 @@ require $header_link;
     <p class="login__if">Зареган?&nbsp</p>
     <a tabindex="4" class="login__reglink" href="<?= $auth_user_form_link ?>">Входи</a>
 
-    <a href="/php-app/" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
+    <a href="/users" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
 
 
     </div>

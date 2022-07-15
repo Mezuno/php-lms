@@ -1,6 +1,24 @@
 <?php
 
-if (isset($_GET['paginationStep'])) $_SESSION['paginationStep'] = $_GET['paginationStep'];
+// КОСТЫЛЬ
+
+if ((substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != '' && (substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != 'users') {
+	$_GET['list'] = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
+	$_SESSION['list'] = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
+} else {
+	$_GET['list'] = 1;
+	$_SESSION['list'] = 1;
+}
+
+//
+
+if (isset($_GET['paginationStep'])) {
+	$_SESSION['paginationStep'] = $_GET['paginationStep'];
+}
+else {
+	$_GET['paginationStep'] = 10;
+	$_SESSION['paginationStep'] = 10;
+}
 
 if (!isset($_SESSION['paginationStep']) || $_SESSION['paginationStep'] > 100 || $_GET['paginationStep'] == '') {
 	$paginationStep = 10;

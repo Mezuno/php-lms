@@ -3,17 +3,18 @@
 session_start();
 $pageName = 'Login';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 require_once $login_user_function_link;
 
+
 if (isset($_SESSION['token'])) {
-  header('Location: /php-app/');
+  header('Location: /users');
   die();
 }
 if (isset($_POST['logbtn'])) {
 
     if (checkLogin($_POST['login'], $_POST['password'], $db)) {
-      header('Location: /php-app/');
+      header('Location: /users');
       die();
     }
 
@@ -43,7 +44,7 @@ include $cookie_error_link;
     <p class="login__if">Не зарегестрированы?&nbsp</p>
     <a tabindex="4" class="login__reglink" href="<?= $reg_user_form_link ?>">Регистрация</a>
     
-    <a tabindex="5" href="/php-app/" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
+    <a tabindex="5" href="/users" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
   </div>
 
 </div>

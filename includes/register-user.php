@@ -1,6 +1,6 @@
 <?php
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
     require_once $connect_db_link;
     require_once $verify_function_link;
 
@@ -16,17 +16,15 @@
         'passwordRepeat' => $passwordRepeat, 
     ];
 
-    // Переделать по ПДО и EXISTS
-    // $sql = "DELETE FROM users WHERE id=?";
-    // $stmt= $db->prepare($sql);
-    // $stmt->execute([$id]);
+    $sql = "SELECT 'id' FROM `users` WHERE `login` = ? OR `email` = ?";
+    $logResult = $db->prepare($sql);
+    $logResult->execute([$login, $email]);
 
-    $logResult = $db->query("SELECT 'id' FROM `users` WHERE `login` = '$login' OR `email` = '$email'");
-
-    while( $row = $logResult->fetch() )
-        if ($row['id'])
+    while( $row = $logResult->fetch() ) {
+        if ($row['id']) {
             $errorString = $errorString.'Пользователь с таким логином или Email уже существует<br>';
-    
+        }
+    }
          
     foreach ($inputData as $key => $value) {
         $errorsArray = verifyInputData($key, $inputData);
@@ -37,7 +35,7 @@
         session_start();
         $_SESSION['savedLoginToReg'] = $login;
         $_SESSION['savedEmailToReg'] = $email;
-        setcookie('regError', $errorString, time()+5, '/php-app');
+        setcookie('regError', $errorString, time()+5, '/');
         header('Location: '.$reg_user_form_link);
     } else {
         session_start();
@@ -49,7 +47,7 @@
 
         $db->query("INSERT INTO `users` (`login`, `email`, `password`, `hash`, `email_confirmed`) VALUES ('" . $login . "','" . $email . "','" . $pass . "', '" . $hash . "', 0)");
         
-        setcookie('regSuccess', 'Вы успешно зарегестрировались!', time()+5, '/php-app');
+        setcookie('regSuccess', 'Вы успешно зарегестрировались!', time()+5, '/');
         header('Location: '.$reg_user_form_link);
     }
 
