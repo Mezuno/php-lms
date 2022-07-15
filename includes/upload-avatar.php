@@ -131,10 +131,10 @@ if (isset($_FILES[$input_name])) {
 
 		if (!empty($success)) {
 			setcookie('success', $success, time()+1, '/php-app');
-			header('Location: /php-app/profile/?id='.$authUserData['id']);
+			header('Location: /php-app/profile/user/'.$authUserData['id']);
 		} else {
 			setcookie('error', $error, time()+1, '/php-app');
-			header('Location: /php-app/profile/?id='.$authUserData['id']);
+			header('Location: /php-app/profile/user/'.$authUserData['id']);
 		}
 	}
 }

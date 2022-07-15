@@ -2,18 +2,21 @@
 
 session_start();
 $pageName = 'Login';
+echo '<br>';
+
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 require_once $login_user_function_link;
 
+
 if (isset($_SESSION['token'])) {
-  header('Location: /php-app/');
+  header('Location: /users');
   die();
 }
 if (isset($_POST['logbtn'])) {
 
     if (checkLogin($_POST['login'], $_POST['password'], $db)) {
-      header('Location: /php-app/');
+      header('Location: /users');
       die();
     }
 
