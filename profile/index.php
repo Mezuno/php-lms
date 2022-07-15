@@ -1,14 +1,8 @@
 <?php
 
-
-if ((substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != '') {
-	$_GET['id'] = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
-}
-
 $pageName = 'Профиль';
 require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
 require $get_user_data_by_id_function_link;
-
 
 $userData = getUserDataById($_GET['id'], $db);
 
@@ -34,7 +28,7 @@ include $cookie_error_link;
 
         <div class="profile__column">
             <?php if($userData['id'] == $authUserData['id']): ?>
-                <form id="profile__change-img-form" class="profile__change-img-form" enctype="multipart/form-data" action="/php-app/includes/upload-avatar.php" method="post">
+                <form id="profile__change-img-form" class="profile__change-img-form" enctype="multipart/form-data" action="upload-avatar.php" method="post">
                     <input name="avatar" type="file" id="avatar__input" hidden>
 					<label class="profile__img-box" for="avatar__input">
                         <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].$authUserData['avatar_path'])): ?>
@@ -57,7 +51,7 @@ include $cookie_error_link;
                 </div>   
             <?php endif ?>
 
-            <a href="/users" class="rounded-button "><i class="fa-solid fa-arrow-left"></i> К списку</a>
+            <a href="/php-app/" class="rounded-button "><i class="fa-solid fa-arrow-left"></i> На главную</a>
         </div>
 
         <div class="profile__column">

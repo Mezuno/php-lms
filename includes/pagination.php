@@ -1,17 +1,5 @@
 <?php
 
-// КОСТЫЛЬ
-
-if ((substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != '') {
-	$_GET['list'] = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
-} else {
-	$_GET['list'] = 1;
-}
-
-// 
-
-
-
 if (isset($_GET['paginationStep'])) $_SESSION['paginationStep'] = $_GET['paginationStep'];
 
 if (!isset($_SESSION['paginationStep']) || $_SESSION['paginationStep'] > 100 || $_GET['paginationStep'] == '') {

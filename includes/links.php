@@ -22,7 +22,7 @@ $verify_function_link =                 $_SERVER['DOCUMENT_ROOT'].'/php-app/func
 $isset_not_empty_check_function =       $_SERVER['DOCUMENT_ROOT'].'/php-app/functions/isset-not-empty-check-function.php';
 $get_user_data_by_id_function_link =    $_SERVER['DOCUMENT_ROOT'].'/php-app/functions/get-user-data-by-id-function.php';
 $login_user_function_link =             $_SERVER['DOCUMENT_ROOT'].'/php-app/functions/login-user-function.php';
-$start_route_function_link =            $_SERVER['DOCUMENT_ROOT'].'/php-app/functions/start-route-function.php';
+$get_all_users_function_link =          $_SERVER['DOCUMENT_ROOT'].'/php-app/crud/read/users/get-all-users-function.php';
 
 // ---- CRUD -------------------------------------------------------------
 
@@ -34,7 +34,7 @@ $create_n_users_link =                  '/php-app/crud/create/users/create-n-use
 $create_n_users_form_link =             '/php-app/crud/create/users/create-n-users-form.php';
 
 // -- update
-$update_user_form_link =                '/php-app/api/users/update';
+$update_user_form_link =                '/php-app/crud/update/users/';
 
 // -- read
 $read_user_link =                       '/php-app/crud/read/users/';
@@ -52,11 +52,11 @@ $main_css_link =                        '/php-app/css/style.css';
 
 // ---- REGISTER and AUTHIFICATION -----------------------------------------
 
-$reg_user_form_link =                   '/php-app/register';
+$reg_user_form_link =                   '/php-app/reg/users/';
 $reg_user_link =                        '/php-app/reg/users/register-user.php';
-$auth_user_form_link =                  '/php-app/login';
+$auth_user_form_link =                  '/php-app/auth/users/';
 $auth_user_link =                       '/php-app/auth/users/login-user.php';
 
 // ---- PROFILE ------------------------------------------------------------
 
-$profile_user_link =                    '/php-app/profile/user/';
+$profile_user_link =                    '/php-app/profile/index.php';

@@ -3,11 +3,11 @@
 
     <td class="td-userdata">
         <?php if($userData['avatar_path'] != NULL && file_exists($_SERVER['DOCUMENT_ROOT'].$userData['avatar_path'])): ?>
-            <a href="/users/<?= $userData['id']?>">
+            <a href="/php-app/profile/?id=<?= $userData['id']?>">
                 <img class="td-img" src="<?= $userData['avatar_path'] ?>?v=<?= time() ?>" alt="">
             </a>
         <?php else: ?>
-            <a href="/users/<?= $userData['id']?>">
+            <a href="/php-app/profile/?id=<?= $userData['id']?>">
                 <img class="td-img" src="/php-app/img/users/profile/avatar/default.jpg" alt="">
             </a>
         <?php endif ?>
@@ -15,7 +15,7 @@
 
     <td class="td-userdata"><?= $userData['id'] ?></td>
     <td class="td-userdata"><?= $userData['email'] ?></td>
-    <td class="td-userdata"><a href="/profile/user/<?= $userData['id']?>"><?= $userData['login'] ?></a></td>
+    <td class="td-userdata"><a href="/php-app/profile/?id=<?= $userData['id']?>"><?= $userData['login'] ?></a></td>
     <td class="td-userdata"><?= $userData['title_role'] ?></td>
     <td class="td-buttons">
 
@@ -28,7 +28,7 @@
     </form>
 
     <?php if ($authUserData['id_role'] == 1): ?>
-    <form action="/php-app/api/users/delete" method="POST">
+    <form action="<?= $delete_user_link ?>" method="POST">
         <input type="text" name="id" value="<?= $userData['id'] ?>" hidden>
         <input type="text" name="list" value="<?= $_GET['list'] ?>" hidden>
         <button class="action-button red" type="submit"><i class="fa-solid fa-trash"></i></button>

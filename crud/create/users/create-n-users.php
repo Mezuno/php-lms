@@ -23,6 +23,5 @@ while ($i <= $id+$n-1) {
 }
 
 header('Location: /php-app/');
-die();
 
 //'INSERT INTO `users` (`email`,`login`, `password`) VALUES ('$email','$login', '$password')'

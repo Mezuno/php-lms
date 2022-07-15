@@ -1,12 +1,8 @@
 <?php 
 
-ini_set('display_errors', 1);
-ini_set('error_reporting', E_ALL);
-
-require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
 require_once $connect_db_link;
 require $get_auth_user_data_link;
-
 
 ?>
 
@@ -26,7 +22,7 @@ require $get_auth_user_data_link;
 
     <div class="w300">
         <?php if(isset($_SESSION['token'])): ?>
-            <a class="header__link" href="<?= $profile_user_link ?><?= $authUserData['id'] ?>"><?= $authUserData['email'] ?></a>
+            <a class="header__link" href="<?= $profile_user_link ?>?id=<?= $authUserData['id'] ?>"><?= $authUserData['email'] ?></a>
             <a class="header__link" href="<?= $logout_link ?>">Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         <?php else: ?>
             <a class="header__link" href="<?= $auth_user_form_link ?>">Вход</a>

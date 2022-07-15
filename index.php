@@ -1,15 +1,38 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+session_start();
+if (!isset($_SESSION['token'])) {
+	setcookie('error', 'Авторизуйся, чтобы ты хоть чего-то стоил на этом ресурсе', time()+1, '/php-app');
+	header('Location: /php-app/auth/users/');
+}
 
-require_once $start_route_function_link;
+$pageName = 'Главная страница';
+require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
+require_once $pagination_link;
 
-$routes = require_once('routes.php');
+include $cookie_error_link;
 
-startRoute($routes);
+?>
 
-die();
+<table cellspacing="0px" cellpadding="10px" border-spacing="1" bordercolor="#606060">
 
-// ini_set('error_reporting', E_ALL);
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
+	<?php
+
+		include $table_header_html_link;
+
+		$resultQuery = $db->query("SELECT * FROM new_schema.users
+		INNER JOIN new_schema.roles ON users.roleid = roles.id_role
+		WHERE deleted_at IS NULL
+		ORDER BY id DESC
+		LIMIT ".(($_GET['list']-1)*$paginationStep).", $paginationStep");
+
+		while ($userData = $resultQuery->fetch()) { require $table_html_link; }
+
+	?>
+
+</table>
+
+<?php include $pagination_html_link ?>
+
+</body>
+</html>
