@@ -8,11 +8,8 @@ require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
 
 require_once $start_route_function_link;
 
-$routes = require_once('routes/routes.php');
-
+$routes = require_once($_SERVER['DOCUMENT_ROOT'].'/routes/routes.php');
 
 startRoute($routes);
 
 die();
-
-

@@ -187,7 +187,6 @@ a i {
 	transition: .1s;
 }
 .action-button:hover {
-	transform: scale(1.3);
 	cursor: pointer;
 	background-color: rgba(255,255,255,0.1) !important;
 }
@@ -528,4 +527,27 @@ a.logo-link {
 }
 .error404__description {
 	
+}
+
+.delete-modal {
+	position: absolute;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+	display: none;
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+a.action-button {
+	color: #ccc;
+}
+.delete-modal .action-button {
+	padding: 15px 20px;
+	color: white;
+	font-size: 20px;
 }

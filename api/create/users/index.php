@@ -1,12 +1,11 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/links.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
 require_once $connect_db_link;
 require_once $verify_function_link;
 require_once $get_auth_user_data_link;
 require_once $get_user_data_by_id_function_link;
 require_once $check_access_admin_link;
-
 
 extract($_POST);
 
@@ -46,7 +45,7 @@ if ($_POST['submit']) {
 }
 
 	$pageName = 'Создание пользователя';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/php-app/includes/header.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 	
 ?>
 
@@ -63,19 +62,21 @@ if ($_POST['submit']) {
 			<input type="submit" name="submit" class="rounded-button" value="Добавить">
 		</form>
 
-		<div class="notification">
-		<?php if (!$createSuccess && isset($createSuccess)): ?>
-			<div class="red p8 fading">
-				<?= $errorString ?>
-			</div>
-		<?php elseif($createSuccess): ?>
-			<div class="green p8 fading">
-				Пользователь <?= $login ?> успешно создан!
+		<?php if (isset($createSuccess)):?>
+			<div class="notification">
+				<?php if (!$createSuccess): ?>
+					<div class="red p8 fading">
+						<?= $errorString ?>
+					</div>
+				<?php elseif($createSuccess): ?>
+					<div class="green p8 fading">
+						Пользователь <?= $login ?> успешно создан!
+					</div>
+				<?php endif ?>
 			</div>
 		<?php endif ?>
-		</div>
 
-		<a href="/php-app/" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
+		<a href="/users" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> К списку</a>
 	</div>
 </div>
 

@@ -59,8 +59,14 @@ if ($_POST['submit']) {
 	}
 	
 	if ($errorString == '') {
-		$password = md5(md5($_POST['password']."yalublulipton"));
-		$db->query("UPDATE `users` SET `email` = '$email', `login` = '$login', `password` = '$password' WHERE `id` = '$id'");
+		
+		if (!empty($password)) {
+			$password = md5(md5($_POST['password']."yalublulipton"));
+			$db->query("UPDATE `users` SET `email` = '$email', `login` = '$login', `password` = '$password' WHERE `id` = '$id'");
+		} else {
+			$db->query("UPDATE `users` SET `email` = '$email', `login` = '$login' WHERE `id` = '$id'");
+		}
+
 		$changeSuccess = true;
 	} else {
 		$changeSuccess = false;

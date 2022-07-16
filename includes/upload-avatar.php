@@ -18,7 +18,7 @@ $deny = array(
 	'htm', 'css', 'sql', 'spl', 'scgi', 'fcgi'
 );
  
-$path = '../img/users/profile/avatar/';
+$path = $_SERVER['DOCUMENT_ROOT'].'/public/img/users/profile/avatar/';
  
 if (isset($_FILES[$input_name])) {
 	if (!is_dir($path)) {
@@ -113,10 +113,10 @@ if (isset($_FILES[$input_name])) {
 			}
 		}
 
-		$oldAvatarPath = $db->query("SELECT avatar_path FROM users WHERE avatar_path IS NOT NULL AND id = '".$authUserData['id']."'")->fetch();
+		$oldAvatarPath = $db->query("SELECT avatar_filename FROM users WHERE avatar_filename IS NOT NULL AND id = '".$authUserData['id']."'")->fetch();
 
-		// if ($oldAvatarPath['avatar_path'] != NULL && file_exists($oldAvatarPath['avatar_path'])) {
-		// 	unlink($oldAvatarPath['avatar_path']);
+		// if ($oldAvatarPath['avatar_filename'] != NULL && file_exists($oldAvatarPath['avatar_filename'])) {
+		// 	unlink($oldAvatarPath['avatar_filename']);
 		// }
 
 		if (!empty($success)) {
@@ -125,9 +125,8 @@ if (isset($_FILES[$input_name])) {
 			unlink($path.md5($authUserData['id']).'.jpg');
 			
 			rename($path.$name, $path.md5($authUserData['id']).'.'.$parts['extension']);
-			$pathToUpload = '/img/users/profile/avatar/';
-			$pathToUploadDB = $pathToUpload.md5($authUserData['id']).'.'.$parts['extension'];
-			$db->query("UPDATE users SET `avatar_path` = '$pathToUploadDB' WHERE `id` = '".$authUserData['id']."'");
+			$avatarNameToUpload = md5($authUserData['id']).'.'.$parts['extension'];
+			$db->query("UPDATE users SET `avatar_filename` = '$avatarNameToUpload' WHERE `id` = '".$authUserData['id']."'");
 
 			setcookie('success', $success, time()+1, '/');
 			header('Location: /users/'.$authUserData['id']);

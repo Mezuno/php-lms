@@ -12,9 +12,9 @@ $logout_link =                          '/includes/logout.php';
 
 // ---- HTML ------------------------------------------------------------
 
-$table_header_html_link =               $_SERVER['DOCUMENT_ROOT'].'/html/table-header-html.php';
-$table_html_link =                      $_SERVER['DOCUMENT_ROOT'].'/html/table-html.php';
-$pagination_html_link =                 $_SERVER['DOCUMENT_ROOT'].'/html/pagination-html.php';
+$table_header_html_link =               $_SERVER['DOCUMENT_ROOT'].'/public/html/table-header-html.php';
+$table_html_link =                      $_SERVER['DOCUMENT_ROOT'].'/public/html/table-html.php';
+$pagination_html_link =                 $_SERVER['DOCUMENT_ROOT'].'/public/html/pagination-html.php';
 
 // ---- FUNCTIONS -------------------------------------------------------
 
@@ -23,36 +23,22 @@ $isset_not_empty_check_function =       $_SERVER['DOCUMENT_ROOT'].'/functions/is
 $get_user_data_by_id_function_link =    $_SERVER['DOCUMENT_ROOT'].'/functions/get-user-data-by-id-function.php';
 $login_user_function_link =             $_SERVER['DOCUMENT_ROOT'].'/functions/login-user-function.php';
 $start_route_function_link =            $_SERVER['DOCUMENT_ROOT'].'/functions/start-route-function.php';
+$get_user_avatar_url_function_link =    $_SERVER['DOCUMENT_ROOT'].'/functions/get-user-avatar-url-function.php';
 
 // ---- CRUD -------------------------------------------------------------
 
 // -- create
 
-// создать только из таблицы
-$create_user_form_link =                '~^/users/[0-9]+/create$~';
+// создать только из таблицы -----------!!!!!!!!!!!!!!!!!!!!!-------------
+$create_user_form_link =                '/api/create/users/';
 $create_user_link =                     '/api/create/users/create-user.php';
 
 $create_n_users_link =                  '/api/create/users/create-n-users.php';
-$create_n_users_form_link =             '/api/create/users/create-n-users-form.php';
-
-// обновить - таблица и профиль
-// -- update
-$update_user_form_link =                '~^/users/[0-9]+/update$~';
-
-// читать - нигде
-// -- read
-$read_user_link =                       '~^/users/[0-9]+/read$~';
-
-// удалить - таблица
-// -- delete
-$delete_user_link =                     '~^/users/[0-9]+/delete$~';
-
-// ---- END CRUD
-
+$create_n_users_form_link =             '/users/create/n';
 
 // ---- CSS ----------------------------------------------------------------
 
-$main_css_link =                        '/css/style.css';
+$main_css_link =                        '/public/css/style.css';
 
 // ---- REGISTER and AUTHIFICATION -----------------------------------------
 
@@ -63,4 +49,7 @@ $auth_user_link =                       '/auth/users/login-user.php';
 
 // ---- PROFILE ------------------------------------------------------------
 
-$profile_user_link =                    '/users/';
+
+// OTHERS
+
+$default_avatar_link =                  '/public/img/users/profile/avatar/default.jpg';

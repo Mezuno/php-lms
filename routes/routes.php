@@ -2,32 +2,47 @@
 
 return [
 
-    "main" => [
-        "filename" => "pages/main"
-    ],
-
+    // log reg
     "login" => [
-        "filename" => "pages/login"
+        "filename" => "public/pages/login"
     ],
 
     "register" => [
-        "filename" => "pages/register"
+        "filename" => "public/pages/register"
     ],
 
+    "register/action" => [
+        "filename" => "includes/register-user"
+    ],
+
+
+    // users table
     "users" => [
-        "filename" => "pages/users"
+        "filename" => "public/pages/users"
     ],
 
     "users/list/[0-9]+" => [
-        "filename" => "pages/users"
+        "filename" => "public/pages/users"
     ],
 
-    "users/[0-9]+/create" => [
-        "filename" => "create"
+    "users/list/\-[0-9]+" => [
+        "filename" => "public/pages/404"
     ],
 
+
+    // users profile
     "users/[0-9]+" => [
-        "filename" => "pages/profile"
+        "filename" => "public/pages/profile"
+    ],
+
+
+    // users crud
+    "users/create" => [
+        "filename" => "api/create/users/index"
+    ],
+
+    "users/create/n" => [
+        "filename" => "api/create/users/create-n-users-form"
     ],
 
     "users/[0-9]+/delete" => [
@@ -36,10 +51,6 @@ return [
 
     "users/[0-9]+/update" => [
         "filename" => "api/update/users/index"
-    ],
-
-    "register/action" => [
-        "filename" => "includes/register-user"
     ],
 
 ];
