@@ -28,8 +28,6 @@ require $header_link;
     <p class="login__if">Зареган?&nbsp</p>
     <a tabindex="4" class="login__reglink" href="<?= $auth_user_form_link ?>">Входи</a>
 
-    <a href="/users" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> На главную</a>
-
 
     </div>
 </div>

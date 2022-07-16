@@ -15,4 +15,3 @@
     ];
 
     $db = new PDO($dsn, $user, $pass, $opt);
-	

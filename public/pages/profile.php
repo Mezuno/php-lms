@@ -43,8 +43,9 @@ include $cookie_error_link;
                 <form id="profile__change-img-form" class="profile__change-img-form" enctype="multipart/form-data" action="/includes/upload-avatar.php" method="post">
                     <input name="avatar" type="file" id="avatar__input" hidden>
 					<label class="profile__img-box" for="avatar__input">
-                        <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].getAvatarUrlById($authUserData['id'], $db))): ?>
-                            
+
+                        <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].getAvatarUrlById($authUserData['id'], $db))
+                        && getAvatarUrlById($authUserData['id'], $db) != '/public/img/users/profile/avatar/'): ?>
 						<img class="profile__img profile__img_hover" src="<?= getAvatarUrlById($authUserData['id'], $db) ?>?v=<?= time() ?>">
                         <?php else: ?>
 						<img class="profile__img profile__img_hover" src="<?= $default_avatar_link ?>?v=<?= time() ?>">
