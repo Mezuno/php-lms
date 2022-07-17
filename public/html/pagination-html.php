@@ -14,7 +14,7 @@
 			<a href="/users/list/<?= $_SESSION['list']-1 ?>"><?= $_SESSION['list']-1 ?></a>
 		<?php endif ?>
 
-			<a class="red" href="/users/list/<?= $_SESSION['list'] ?>"><?= $_SESSION['list'] ?></a>
+			<a class="green" href="/users/list/<?= $_SESSION['list'] ?>"><?= $_SESSION['list'] ?></a>
 
 		<?php if ($_SESSION['list']+1 < $usersCount['count(*)'] / $paginationStep): ?>
 			<a href="/users/list/<?= $_SESSION['list']+1 ?>"><?= $_SESSION['list']+1 ?></a>
@@ -31,15 +31,14 @@
 
 	</div>
 
-
-	<form action="/users">
-		<p class="pagination-input-description">Кол-во записей на странице: </p>
-		<input class="input-lists-count" type="number" max="100" name="paginationStep">
-		<button class="rounded-button" type="submit">Установить</button>
-	</form>
-	<form action="/users">
-		<p class="pagination-input-description">Cтраница: </p>
-		<input class="input-lists-number" type="number" name="list">
-		<button class="rounded-button" type="submit">Перейти</button>
-	</form>
+	<div class="flex-row">
+		<form action="/users">
+			<input placeholder="Лимит" class="input-lists-count" type="number" max="100" name="paginationStep">
+			<button class="rounded-button" type="submit">Установить</button>
+		</form>
+		<form action="/users">
+			<input placeholder="Cтраница" class="input-lists-number" type="number" name="list">
+			<button class="rounded-button" type="submit">Перейти</button>
+		</form>
+	</div>
 </div>

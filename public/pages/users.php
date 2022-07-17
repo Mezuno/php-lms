@@ -7,7 +7,7 @@ if (!isset($_SESSION['token'])) {
 	die();
 }
 
-$pageName = 'Главная страница';
+$pageName = 'Таблица пользователей';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 require_once $pagination_link;
 require_once $get_user_avatar_url_function_link;
@@ -15,6 +15,12 @@ require_once $get_user_avatar_url_function_link;
 include $cookie_error_link;
 
 ?>
+
+<div class="navigation">
+	
+</div>
+
+<?php include $pagination_html_link ?>
 
 <table cellspacing="0px" cellpadding="10px" border-spacing="1" bordercolor="#606060">
 
@@ -31,10 +37,12 @@ include $cookie_error_link;
 		while ($userData = $resultQuery->fetch()) { require $table_html_link; }
 
 	?>
-
+	<div class="volume1"></div>
+	<div class="volume2"></div>
+	<div class="volume3"></div>
 </table>
 
-<?php include $pagination_html_link ?>
+
 
 </body>
 </html>

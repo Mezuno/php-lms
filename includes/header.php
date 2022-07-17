@@ -18,17 +18,18 @@ require $get_auth_user_data_link;
 
 <body>
 <header class="header">
-    <h1 class="page-title w300"><a class="logo-link" href="/users">PHP</a></h1>
-    <h1 class="page-title center"><?= $pageName ?></h1>
+    <div class="header__row">
+        <h1 class="page-title"><a class="logo-link" href="/users"><i class="fa-solid fa-heart-crack"></i></a></h1>
+        <h1 class="page-title center"><?= $pageName ?></h1>
 
-    <div class="w300">
-        <?php if(isset($_SESSION['token'])): ?>
-            <a class="header__link" href="/users/<?= $authUserData['id'] ?>"><?= $authUserData['email'] ?></a>
-            <a class="header__link" href="<?= $logout_link ?>">Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        <?php else: ?>
-            <a class="header__link" href="<?= $auth_user_form_link ?>">Вход</a>
-            <a class="header__link" href="<?= $reg_user_form_link ?>">Регестрация</a>
-        <?php endif ?>
+        <div class="">
+            <?php if(isset($_SESSION['token'])): ?>
+                <a class="header__link" href="/users/<?= $authUserData['id'] ?>"><?= $authUserData['email'] ?></a>
+                <a class="header__link" href="<?= $logout_link ?>">Выйти <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <?php else: ?>
+                <a class="header__link" href="<?= $auth_user_form_link ?>">Вход</a>
+                <a class="header__link" href="<?= $reg_user_form_link ?>">Регестрация</a>
+            <?php endif ?>
+        </div>
     </div>
-
 </header>
