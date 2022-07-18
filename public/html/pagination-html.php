@@ -61,7 +61,10 @@
 	</div>
 
 	<form class="search" action="/users/list/<?= $_SESSION['list'] ?>">
-		<input name="strToSearch" type="text" placeholder="Поиск">
+		<?php if (isset($_GET['strToSearch'])): ?>
+			<a href="/users/list/<?= $_SESSION['list'] ?>" class="action-button"><i class="fas fa-x"></i></a>
+		<?php endif ?>
+		<input name="strToSearch" type="text" placeholder="Поиск" value="<?= $_GET['strToSearch'] ?>">
 		<button class="rounded-button"><i class="fas fa-search"></i></button>
 	</form>
 </div>

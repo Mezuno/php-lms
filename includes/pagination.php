@@ -1,9 +1,20 @@
 <?php
 
+if (isset($_GET['strToSearch'])) {
+	$strToSearch = $_GET['strToSearch'];
+	$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `deleted_at` IS NULL
+	AND ((`id` LIKE '%$strToSearch%') OR (`login` LIKE '%$strToSearch%') OR (`email` LIKE '%$strToSearch%'))");
+	$addToUriStrToSearch = '?strToSearch='.$_GET['strToSearch'];
+} else {
+	$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `deleted_at` IS NULL");
+}
+$usersCount = $usersCountResult->fetch();
+
+
 if (isset($_GET['paginationStep']) && !empty($_GET['paginationStep'])) {
 	$_SESSION['paginationStep'] = $_GET['paginationStep'];
 	$paginationStep = $_GET['paginationStep'];
-	header('Location: /users/list/'.$_SESSION['list']);
+	header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 	die();
 } else {
 	if (isset($_SESSION['paginationStep']) && $_SESSION['paginationStep'] <= 100) {
@@ -14,27 +25,24 @@ if (isset($_GET['paginationStep']) && !empty($_GET['paginationStep'])) {
 }
 
 
-$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `deleted_at` IS NULL");
-$usersCount = $usersCountResult->fetch();
-
 if (isset($_GET['list'])) {
 
 	if ($_GET['list'] > $usersCount['count(*)'] / $paginationStep) {
 		$_GET['list'] = ceil($usersCount['count(*)'] / $paginationStep);
 		$_SESSION['list'] = $_GET['list'];
-		header('Location: /users/list/'.$_SESSION['list']);
+		header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 		die();
 	}
 
 	if ($_GET['list'] < 0) {
 		$_GET['list'] = 1;
 		$_SESSION['list'] = $_GET['list'];
-		header('Location: /users/list/'.$_SESSION['list']);
+		header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 		die();
 	}
 
 	$_SESSION['list'] = $_GET['list'];
-	header('Location: /users/list/'.$_SESSION['list']);
+	header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 	die();
 
 } else {
@@ -48,14 +56,14 @@ if (isset($_GET['list'])) {
 		if ($listFromUri > ceil($usersCount['count(*)'] / $paginationStep)) {
 
 			$_SESSION['list'] = ceil($usersCount['count(*)'] / $paginationStep);
-			header('Location: /users/list/'.$_SESSION['list']);
+			header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 			die();
 		}
 
 		if ($listFromUri < 1) {
 			$listFromUri = 1;
 			$_SESSION['list'] = $listFromUri;
-			header('Location: /users/list/'.$_SESSION['list']);
+			header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
 			die();
 		}
 
