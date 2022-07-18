@@ -3,7 +3,7 @@
 session_start();
 if (isset($_SESSION['token'])) header('Location: /');
 
-$pageName = 'Register';
+$pageName = 'Регистрация';
 require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
 require $header_link;
 

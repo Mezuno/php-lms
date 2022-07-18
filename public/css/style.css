@@ -212,8 +212,8 @@ a i {
 	color: #ccc;
 	background-color: rgba(0,0,0,0);
 	border: 0;
-	border-radius: 8px;
-	padding: 5px 15px 7px;
+	border-radius: 6px;
+	padding: 5px 8px 7px;
 	margin-right: 10px;
 	transition: .1s;
 }
@@ -340,14 +340,16 @@ img.td-img {
 
 a.add-button {
 	color: white;
-	padding: 4px 6px 5px;
-	margin: 5px 10px;
+	padding: 6px 6px 7px;
+	margin: 5px 8px;
 	border-radius: 6px;
 	transition: .2s;
 }
 a.add-button:hover {
-	background-color: #438231;
-	transform: scale(1.2);
+	background-color: #2ea043;
+}
+a.add-button i {
+	font-size: 16px;
 }
 
 input {
@@ -447,7 +449,7 @@ input {
 	width: 70%;
 	margin: 0 15%;
 	padding: 5px 10px;
-	display: flex;
+	position: relative;
 	margin-top: 70px;
 	border-radius: 6px;
 	display: flex;
@@ -469,10 +471,25 @@ input {
 	margin-right: 10px;
 }
 .pagination a:hover {
-	text-decoration: underline;
+	background-color: #238636;
+}
+.pagination a.green {
+	color: white;
+	background-color: #238636;
 }
 .list-lists a {
+	transition: .2s;
+	font-size: 14px;
 	margin: 0 3px;
+	width: 26px;
+	padding: 5px;
+	text-align: center;
+	background-color: #0d1117;
+	border: 1px solid #30363d;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .list-lists a:first-child {
 	margin-left: 0;
@@ -612,4 +629,30 @@ a.action-button {
 	background-color: #161b22;
 	border-radius: 0 6px 6px 0;
 	display: none;
+}
+
+.bubble1, .bubble2, .bubble3 {
+	position: absolute;
+	border-radius: 50%;
+}
+.bubble1 {
+	left: 50px;
+	top: 50px;
+	width: 300px;
+	height: 300px;	
+	background-color: rgba(255, 255, 255, 0.05);
+}
+.bubble2 {
+	left: 600px;
+	top: 600px;
+	width: 200px;
+	height: 200px;
+	background-color: rgba(255, 255, 255, 0.05);
+}
+.bubble3 {
+	left: 150px;
+	top: 300px;
+	width: 200px;
+	height: 200px;
+	background-color: rgba(255, 255, 255, 0.05);
 }
