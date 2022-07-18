@@ -28,11 +28,22 @@ include $cookie_error_link;
 
 		include $table_header_html_link;
 
-		$resultQuery = $db->query("SELECT * FROM new_schema.users
-		INNER JOIN new_schema.roles ON users.roleid = roles.id_role
-		WHERE deleted_at IS NULL
-		ORDER BY id_role, id
-		LIMIT ".(($_SESSION['list']-1)*$paginationStep).", $paginationStep");
+		if (isset($_GET['strToSearch'])) {
+			$strToSearch = $_GET['strToSearch'];
+
+			$resultQuery = $db->query("SELECT * FROM new_schema.users
+			INNER JOIN new_schema.roles ON users.roleid = roles.id_role
+			WHERE `deleted_at` IS NULL
+			AND ((`id` LIKE '%$strToSearch%') OR (`login` LIKE '%$strToSearch%') OR (`email` LIKE '%$strToSearch%'))
+			ORDER BY id DESC
+			LIMIT ".(($_SESSION['list']-1)*$paginationStep).", $paginationStep");
+		} else {
+			$resultQuery = $db->query("SELECT * FROM new_schema.users
+			INNER JOIN new_schema.roles ON users.roleid = roles.id_role
+			WHERE deleted_at IS NULL
+			ORDER BY id DESC
+			LIMIT ".(($_SESSION['list']-1)*$paginationStep).", $paginationStep");
+		}
 
 		while ($userData = $resultQuery->fetch()) { require $table_html_link; }
 

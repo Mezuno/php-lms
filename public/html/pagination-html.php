@@ -41,4 +41,9 @@
 			<button class="rounded-button" type="submit">Перейти</button>
 		</form>
 	</div>
+
+	<form class="search" action="/users/list/<?= $_SESSION['list'] ?>">
+		<input name="strToSearch" type="text" placeholder="Поиск">
+		<button class="rounded-button"><i class="fas fa-search"></i></button>
+	</form>
 </div>
