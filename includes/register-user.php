@@ -1,6 +1,6 @@
 <?php
 
-    require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
     require_once $connect_db_link;
     require_once $verify_function_link;
 

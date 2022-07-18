@@ -1,9 +1,12 @@
 <?php
 
+// ---- CONFIG -----------------------------------------------------------
+
+
 // ---- INCLUDES ---------------------------------------------------------
 
-$header_link =                          $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 $connect_db_link =                      $_SERVER['DOCUMENT_ROOT'].'/includes/connect-db.php';
+$header_link =                          $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 $get_auth_user_data_link =              $_SERVER['DOCUMENT_ROOT'].'/includes/get-auth-user-data.php';
 $pagination_link =                      $_SERVER['DOCUMENT_ROOT'].'/includes/pagination.php';
 $check_access_admin_link =              $_SERVER['DOCUMENT_ROOT'].'/includes/check-access-admin.php';
@@ -12,9 +15,9 @@ $logout_link =                          '/includes/logout.php';
 
 // ---- HTML ------------------------------------------------------------
 
-$table_header_html_link =               $_SERVER['DOCUMENT_ROOT'].'/public/html/table-header-html.php';
-$table_html_link =                      $_SERVER['DOCUMENT_ROOT'].'/public/html/table-html.php';
-$pagination_html_link =                 $_SERVER['DOCUMENT_ROOT'].'/public/html/pagination-html.php';
+$table_header_html_link =               $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-header-html.php';
+$table_html_link =                      $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-html.php';
+$pagination_html_link =                 $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/pagination-html.php';
 
 // ---- FUNCTIONS -------------------------------------------------------
 
@@ -38,7 +41,7 @@ $create_n_users_form_link =             '/users/create/n';
 
 // ---- CSS ----------------------------------------------------------------
 
-$main_css_link =                        '/public/css/style.css';
+$main_css_link =                        '/resources/css/style.css';
 
 // ---- REGISTER and AUTHIFICATION -----------------------------------------
 
@@ -52,4 +55,6 @@ $auth_user_link =                       '/auth/users/login-user.php';
 
 // OTHERS
 
-$default_avatar_link =                  '/public/img/users/profile/avatar/default.jpg';
+$default_avatar_link =                  '/resources/img/users/profile/avatar/default.jpg';
+$users_table_link =                     $_SERVER['DOCUMENT_ROOT'].'/resources/views/users.php';
+$login_user_link =                      $_SERVER['DOCUMENT_ROOT'].'/resources/views/login.php';

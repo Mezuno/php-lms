@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require $connect_db_link;
 require $verify_function_link;
 require $get_auth_user_data_link;
@@ -22,7 +22,7 @@ if($authUserData['id'] != $id) {
 }
 
 
-if ($_POST['submit']) {
+if (isset($_POST['submit'])) {
 
 	$inputData = [
 		'login' => $login,
@@ -76,8 +76,9 @@ if ($_POST['submit']) {
 	$userDataFromDB = getUserDataById($id, $db);
 }
 
+
 $pageName = 'Изменение пользователя id'.($_POST['id']);
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['submit'])) {
-	require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 	require $connect_db_link;
 	require $get_auth_user_data_link;
 	require $check_access_admin_link;
@@ -28,8 +28,10 @@ if (isset($_POST['submit'])) {
 }
 
 	$pageName = 'Создание N пользователей';
-	require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/resourses/views/components/header.php';
+	die('0');
 	require $check_access_admin_link;
+	die;
 	
 ?>
 

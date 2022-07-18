@@ -2,13 +2,20 @@
 
 return [
 
+    "/" => [
+        "filename" => "index"
+    ],
+    "" => [
+        "filename" => "index"
+    ],
+
     // log reg
     "login" => [
-        "filename" => "public/pages/login"
+        "filename" => "resources/views/login"
     ],
 
     "register" => [
-        "filename" => "public/pages/register"
+        "filename" => "resources/views/register"
     ],
 
     "register/action" => [
@@ -18,21 +25,21 @@ return [
 
     // users table
     "users" => [
-        "filename" => "public/pages/users"
+        "filename" => "resources/views/users"
     ],
 
     "users/list/[0-9]+" => [
-        "filename" => "public/pages/users"
+        "filename" => "resources/views/users"
     ],
 
     "users/list/\-[0-9]+" => [
-        "filename" => "public/pages/404"
+        "filename" => "resources/views/404"
     ],
 
 
     // users profile
     "users/[0-9]+" => [
-        "filename" => "public/pages/profile"
+        "filename" => "resources/views/profile"
     ],
 
 

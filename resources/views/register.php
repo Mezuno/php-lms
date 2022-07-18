@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['token'])) header('Location: /');
 
 $pageName = 'Регистрация';
-require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require $header_link;
 
 ?>

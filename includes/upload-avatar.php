@@ -2,7 +2,7 @@
 
 ob_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require_once $connect_db_link;
 require_once $get_auth_user_data_link;
 
@@ -18,7 +18,7 @@ $deny = array(
 	'htm', 'css', 'sql', 'spl', 'scgi', 'fcgi'
 );
  
-$path = $_SERVER['DOCUMENT_ROOT'].'/public/img/users/profile/avatar/';
+$path = $_SERVER['DOCUMENT_ROOT'].'/resources/img/users/profile/avatar/';
  
 if (isset($_FILES[$input_name])) {
 	if (!is_dir($path)) {

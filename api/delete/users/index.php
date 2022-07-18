@@ -7,7 +7,7 @@ $_POST['id'] = $parseUri[2];;
 
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require_once $connect_db_link;
 $error = false;
 
@@ -50,6 +50,7 @@ if (isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != $authUserData
 	// $stmt = $db->prepare($sql);
 	// $stmt->execute([$_POST['id']]);
 
+    setcookie('success', 'Пользователь id' . $_POST['id'] . ' успешно удалён.', time()+1, '/');
 	$linkToRedirect = '/users/list/'.$list;
 }
 

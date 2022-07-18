@@ -1,7 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
-require_once $connect_db_link;
+require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
+require $connect_db_link;
 require_once $verify_function_link;
 require_once $get_auth_user_data_link;
 require_once $get_user_data_by_id_function_link;
@@ -45,7 +45,7 @@ if ($_POST['submit']) {
 }
 
 	$pageName = 'Создание пользователя';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 	
 ?>
 

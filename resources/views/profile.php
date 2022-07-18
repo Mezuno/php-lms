@@ -6,7 +6,7 @@ if ((substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != '') {
 }
 
 $pageName = 'Профиль';
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 require $get_user_data_by_id_function_link;
 require $get_user_avatar_url_function_link;
 
@@ -20,12 +20,12 @@ if ($userData['id'] == NULL) {
 
 if (!$userData) {
     setcookie('error', 'Пользователя с таким id не существует', time()+1, '/');
-    header('Location: /');
+    header('Location: /users');
 } else {
     if ($userData['id'] != $authUserData['id']) {
         if ($authUserData['id_role'] != 1) {
             setcookie('error', 'Вы можете просматривать только свой профиль', time()+1, '/');
-            header('Location: /');
+            header('Location: /users');
         }
     }
 }
