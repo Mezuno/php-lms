@@ -31,7 +31,7 @@ include $cookie_error_link;
 		$resultQuery = $db->query("SELECT * FROM new_schema.users
 		INNER JOIN new_schema.roles ON users.roleid = roles.id_role
 		WHERE deleted_at IS NULL
-		ORDER BY id_role, id
+		ORDER BY id DESC
 		LIMIT ".(($_SESSION['list']-1)*$paginationStep).", $paginationStep");
 
 		while ($userData = $resultQuery->fetch()) { require $table_html_link; }

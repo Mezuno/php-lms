@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$pageName = 'Login';
+$pageName = 'Вход';
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 require_once $login_user_function_link;

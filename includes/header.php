@@ -33,3 +33,6 @@ require $get_auth_user_data_link;
         </div>
     </div>
 </header>
+<div class="bubble1"></div>
+<div class="bubble2"></div>
+<div class="bubble3"></div>
