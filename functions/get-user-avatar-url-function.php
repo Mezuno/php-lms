@@ -2,7 +2,7 @@
 
 function getAvatarUrlById($id, &$db) {
 
-    $avatarsPath = '/public/img/users/profile/avatar/';
+    $avatarsPath = '/resources/img/users/profile/avatar/';
 
     $sql = "SELECT avatar_filename FROM users WHERE id = ?";
     $stmt = $db->prepare($sql);

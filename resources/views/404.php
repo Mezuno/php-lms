@@ -1,7 +1,7 @@
 <?php
 
 $pageName = '404';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 
 ?>
 

@@ -8,7 +8,7 @@ if (!isset($_SESSION['token'])) {
 }
 
 $pageName = 'Таблица пользователей';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 require_once $pagination_link;
 require_once $get_user_avatar_url_function_link;
 
@@ -52,8 +52,6 @@ include $cookie_error_link;
 	<div class="volume2"></div>
 	<div class="volume3"></div>
 </table>
-
-
 
 </body>
 </html>

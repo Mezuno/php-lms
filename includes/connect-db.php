@@ -1,17 +1,11 @@
 <?php
 
-	$host = 'localhost';
-	$user = 'root';
-	$pass = '22072003';
-	$db = 'new_schema';
+$databaseInfo = require $_SERVER['DOCUMENT_ROOT'].'/config/database.php';
 
-	$charset = 'utf8';
+$host = $databaseInfo['host'];
+$database = $databaseInfo['database'];
+$charset = $databaseInfo['charset'];
 
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $opt = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
+$dsn = "mysql:host=$host;dbname=$database;charset=$charset";
 
-    $db = new PDO($dsn, $user, $pass, $opt);
+$db = new PDO($dsn, $databaseInfo['username'], $databaseInfo['password'], $databaseInfo['opt']);

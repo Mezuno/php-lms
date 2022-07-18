@@ -1,6 +1,6 @@
 <?php 
 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/links.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require $connect_db_link;
 require $get_auth_user_data_link;
 

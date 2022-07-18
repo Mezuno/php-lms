@@ -13,14 +13,15 @@ function startRoute(array $routes)
         $correctRoutes[$route] = $params;
     }
 
+
     if (!matchRoute($correctRoutes, $routeParams, $uri)) {
-        require $_SERVER['DOCUMENT_ROOT'].'/pages/404.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/resources/views/404.php';
         die;
     } else {
         $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $routeParams['filename'] . '.php';
 
         if (!file_exists($path)) {
-            require $_SERVER['DOCUMENT_ROOT'].'/pages/404.php';
+            require $_SERVER['DOCUMENT_ROOT'].'/resources/views/404.php';
             die;
         } else {
             require $path;

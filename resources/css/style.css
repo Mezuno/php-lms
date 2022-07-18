@@ -104,6 +104,7 @@ body {
 }
 
 .bg-w80p-mt70 {
+	position: relative;
 	width: 70%;
 	background-color: #0d1117;
 	border: 1px solid #30363d;
@@ -240,7 +241,7 @@ input[name="password"], input[name="passwordRepeat"]  {
 .rounded-button {
 	width: fit-content;
 	cursor: pointer;
-	padding: 6.5px 10px;
+	padding: 7px 10px;
 	display: inline-block;
 	color: white !important;
 	border-radius: 6px;
@@ -655,4 +656,21 @@ a.action-button {
 	width: 200px;
 	height: 200px;
 	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.search-button i {
+	font-size: 14px;
+}
+
+.search-button {
+	position: absolute;
+	right: 20px;
+	background-color: rgba(0,0,0,0);
+	padding: 6px 10px;
+	border-left: 1px solid #30363d;
+	color: #ccc;
+	border-radius: 0 6px 6px 0;
+}
+.search-button:hover {
+	background-color: rgba(255,255,255,0.1);
 }

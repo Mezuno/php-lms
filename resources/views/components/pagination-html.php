@@ -65,6 +65,6 @@
 			<a href="/users/list/<?= $_SESSION['list'] ?>" class="action-button"><i class="fas fa-x"></i></a>
 		<?php endif ?>
 		<input name="strToSearch" type="text" placeholder="Поиск" value="<?= $_GET['strToSearch'] ?>">
-		<button class="rounded-button"><i class="fas fa-search"></i></button>
+		<button class="search-button"><i class="fas fa-search"></i></button>
 	</form>
 </div>
