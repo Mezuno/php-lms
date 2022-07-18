@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET['paginationStep'])) {
+if (isset($_GET['paginationStep']) && !empty($_GET['paginationStep'])) {
 	$_SESSION['paginationStep'] = $_GET['paginationStep'];
 	$paginationStep = $_GET['paginationStep'];
 	header('Location: /users/list/'.$_SESSION['list']);
