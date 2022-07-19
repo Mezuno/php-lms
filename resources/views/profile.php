@@ -1,17 +1,18 @@
 <?php
 
+session_start();
 
 if ((substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1)) != '') {
-	$_GET['id'] = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
+	$userId = substr(strrchr($_SERVER['REQUEST_URI'], '/'), 1);
 }
 
 $pageName = 'Профиль';
 require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 require $get_user_data_by_id_function_link;
 require $get_user_avatar_url_function_link;
+require $get_auth_user_data_link;
 
-
-$userData = getUserDataById($_GET['id'], $db);
+$userData = getUserDataById($userId, $db);
 
 if ($userData['id'] == NULL) {
     require '404.php';
@@ -30,6 +31,7 @@ if (!$userData) {
     }
 }
 
+
 include $cookie_error_link;
 
 ?>
@@ -45,7 +47,7 @@ include $cookie_error_link;
 					<label class="profile__img-box" for="avatar__input">
 
                         <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].getAvatarUrlById($authUserData['id'], $db))
-                        && getAvatarUrlById($authUserData['id'], $db) != '/public/img/users/profile/avatar/'): ?>
+                        && getAvatarUrlById($authUserData['id'], $db) != '/resources/img/users/profile/avatar/'): ?>
 						<img class="profile__img profile__img_hover" src="<?= getAvatarUrlById($authUserData['id'], $db) ?>?v=<?= time() ?>">
                         <?php else: ?>
 						<img class="profile__img profile__img_hover" src="<?= $default_avatar_link ?>?v=<?= time() ?>">
@@ -58,7 +60,7 @@ include $cookie_error_link;
             <?php else: ?>
                 <div class="profile__change-img-form">
                     <?php if (file_exists($_SERVER['DOCUMENT_ROOT'].getAvatarUrlById($userData['id'], $db))
-                        && getAvatarUrlById($userData['id'], $db) != '/public/img/users/profile/avatar/'): ?>
+                        && getAvatarUrlById($userData['id'], $db) != '/resources/img/users/profile/avatar/'): ?>
                         <div class="ptofile__img-box"><img class="profile__img" src="<?= getAvatarUrlById($userData['id'], $db) ?>?v=<?= time() ?>"></div>
                     <?php else: ?>
                         <div class="ptofile__img-box"><img class="profile__img" src="<?= $default_avatar_link ?>?v=<?= time() ?>" alt=""></div>

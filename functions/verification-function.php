@@ -34,8 +34,8 @@ function verifyInputData($inputDataKey, array $inputData) {
 
         case 'password':
 
-             if (strlen($inputData[$inputDataKey]) < 8)
-                array_push($errorsOfVerify, 'Минимальная длина пароля 8 символа<br><br>');
+                if (strlen($inputData[$inputDataKey]) < 8)
+                array_push($errorsOfVerify, 'Минимальная длина пароля 8 символов<br><br>');
 
             if (strlen($inputData[$inputDataKey]) > 35)
                 array_push($errorsOfVerify, 'Максимальная длина пароля 35 символов<br><br>');
@@ -49,6 +49,19 @@ function verifyInputData($inputDataKey, array $inputData) {
             if ($inputData['password'] == $inputData['login'])
                 array_push($errorsOfVerify, 'Логин и пароль не могут быть одинаковыми<br><br>');
                 
+            break;
+
+        case 'title_course':
+
+            if (mb_strlen($inputData[$inputDataKey]) < 4)
+                array_push($errorsOfVerify, 'Минимальная длина названия курса 4 символа<br><br>');
+
+            if (mb_strlen($inputData[$inputDataKey]) > 35)
+                array_push($errorsOfVerify, 'Максимальная длина названия курса 35 символов<br><br>');
+
+            if (!preg_match("/^[a-zA-Z0-9АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя\s\-_]+$/", $inputData[$inputDataKey]))
+                array_push($errorsOfVerify, 'В названии курса разрешены только латинские и русские<br>символы, цифры и символы - и _<br><br>');
+
             break;
     }
 

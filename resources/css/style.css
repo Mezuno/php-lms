@@ -39,6 +39,7 @@ img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /*--------------------*/
 
+.brd-rd6 { border-radius: 6px; }
 a { color: white; }
 .w300 {	width: 300px; }
 a:visited {	color: white; }
@@ -623,13 +624,14 @@ a.action-button {
 
 .navigation {
 	position: absolute;
-	width: 17%;
+	width: 10%;
 	left: 0;
-	top: 140px;
+	top: 180px;
 	height: 557px;
-	background-color: #161b22;
+	background-color: #0d1117;
+	border: 1px solid #30363d;
+	border-left: 0px;
 	border-radius: 0 6px 6px 0;
-	display: none;
 }
 
 .bubble1, .bubble2, .bubble3 {

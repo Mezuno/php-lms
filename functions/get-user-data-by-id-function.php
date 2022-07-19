@@ -11,3 +11,15 @@ function getUserDataById($id, &$db) {
     return $stmt->fetch();
 
 }
+
+function getCourseDataById($id, &$db) {
+    
+    $sql = "SELECT * FROM new_schema.courses
+    INNER JOIN new_schema.users ON courses.author_course = users.id
+    WHERE deleted_at_course IS NULL AND id_course = ?;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$id]);
+
+    return $stmt->fetch();
+
+}

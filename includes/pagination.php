@@ -1,20 +1,30 @@
 <?php
 
-if (isset($_GET['strToSearch'])) {
-	$strToSearch = $_GET['strToSearch'];
-	$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `deleted_at` IS NULL
-	AND ((`id` LIKE '%$strToSearch%') OR (`login` LIKE '%$strToSearch%') OR (`email` LIKE '%$strToSearch%'))");
-	$addToUriStrToSearch = '?strToSearch='.$_GET['strToSearch'];
-} else {
-	$usersCountResult = $db->query("SELECT count(*) FROM users WHERE `deleted_at` IS NULL");
-}
-$usersCount = $usersCountResult->fetch();
+$entity = $paginationEntity;
+
+// if (isset($_GET['strToSearch'])) {
+// 	$strToSearch = $_GET['strToSearch'];
+// 	$itemsCountResult = $db->query("SELECT count(*) FROM $entity WHERE `deleted_at` IS NULL
+// 	AND ((`id` LIKE '%$strToSearch%') OR (`login` LIKE '%$strToSearch%') OR (`email` LIKE '%$strToSearch%'))");
+// 	$addToUriStrToSearch = '?strToSearch='.$_GET['strToSearch'];
+// } else {
+	if ($entity == 'users') {
+		$itemsCountResult = $db->query("SELECT count(*) FROM $entity WHERE `deleted_at` IS NULL");
+	}
+	if ($entity == 'courses') {
+		$userId = $authUserData['id'];
+		$itemsCountResult = $db->query("SELECT count(*) FROM $entity WHERE `deleted_at_course` IS NULL
+	AND author_course = $userId");
+
+	}
+// }
+$entityCount = $itemsCountResult->fetch();
 
 
 if (isset($_GET['paginationStep']) && !empty($_GET['paginationStep'])) {
 	$_SESSION['paginationStep'] = $_GET['paginationStep'];
 	$paginationStep = $_GET['paginationStep'];
-	header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+	header('Location: /' . $entity . '/list/' . $_SESSION['list'].$addToUriStrToSearch);
 	die();
 } else {
 	if (isset($_SESSION['paginationStep']) && $_SESSION['paginationStep'] <= 100) {
@@ -24,25 +34,24 @@ if (isset($_GET['paginationStep']) && !empty($_GET['paginationStep'])) {
 	}
 }
 
-
 if (isset($_GET['list'])) {
 
-	if ($_GET['list'] > $usersCount['count(*)'] / $paginationStep) {
-		$_GET['list'] = ceil($usersCount['count(*)'] / $paginationStep);
+	if ($_GET['list'] > $entityCount['count(*)'] / $paginationStep) {
+		$_GET['list'] = ceil($entityCount['count(*)'] / $paginationStep);
 		$_SESSION['list'] = $_GET['list'];
-		header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+		header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
 		die();
 	}
 
 	if ($_GET['list'] < 0) {
 		$_GET['list'] = 1;
 		$_SESSION['list'] = $_GET['list'];
-		header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+		header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
 		die();
 	}
 
 	$_SESSION['list'] = $_GET['list'];
-	header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+	header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
 	die();
 
 } else {
@@ -53,17 +62,17 @@ if (isset($_GET['list'])) {
 
 	if (is_numeric($listFromUri)) {
 
-		if ($listFromUri > ceil($usersCount['count(*)'] / $paginationStep)) {
+		if ($listFromUri > ceil($entityCount['count(*)'] / $paginationStep)) {
 
-			$_SESSION['list'] = ceil($usersCount['count(*)'] / $paginationStep);
-			header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+			$_SESSION['list'] = ceil($entityCount['count(*)'] / $paginationStep);
+			header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
 			die();
 		}
 
 		if ($listFromUri < 1) {
 			$listFromUri = 1;
 			$_SESSION['list'] = $listFromUri;
-			header('Location: /users/list/'.$_SESSION['list'].$addToUriStrToSearch);
+			header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
 			die();
 		}
 
@@ -73,7 +82,13 @@ if (isset($_GET['list'])) {
 	} else {
 
 		if (isset($_SESSION['list'])) {
-			$_GET['list'] = $_SESSION['list'];
+			if ($_SESSION['list'] > ceil($entityCount['count(*)'] / $paginationStep)) {
+				$_SESSION['list'] = ceil($entityCount['count(*)'] / $paginationStep);
+				header('Location: /' . $entity . '/list/'.$_SESSION['list'].$addToUriStrToSearch);
+				die();
+			} else {
+				$_GET['list'] = $_SESSION['list'];
+			}
 		} else {
 			$_GET['list'] = 1;
 			$_SESSION['list'] = 1;

@@ -36,3 +36,8 @@ require $get_auth_user_data_link;
 <div class="bubble1"></div>
 <div class="bubble2"></div>
 <div class="bubble3"></div>
+
+<div class="navigation flex-column p20">
+	<div class="mb20"><a href="/users">Юзеры</a></div>
+	<div class="mb20"><a href="/courses">Мои Курсы</a></div>
+</div>
