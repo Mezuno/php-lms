@@ -36,6 +36,17 @@ return [
         "filename" => "resources/views/404"
     ],
 
+    // courses table
+    "courses" => [
+        "filename" => "resources/views/courses"
+    ],
+    "courses/list/[0-9]+" => [
+        "filename" => "resources/views/courses"
+    ],
+    "courses/list/\-[0-9]+" => [
+        "filename" => "resources/views/404"
+    ],
+
 
     // users profile
     "users/[0-9]+" => [
@@ -45,11 +56,11 @@ return [
 
     // users crud
     "users/create" => [
-        "filename" => "api/create/users/index"
+        "filename" => "resources/views/api/create/users/index"
     ],
 
     "users/create/n" => [
-        "filename" => "api/create/users/create-n-users-form"
+        "filename" => "resources/views/api/create/users/index-n"
     ],
 
     "users/[0-9]+/delete" => [
@@ -57,7 +68,24 @@ return [
     ],
 
     "users/[0-9]+/update" => [
-        "filename" => "api/update/users/index"
+        "filename" => "resources/views/api/update/users/index"
+    ],
+
+    // users crud
+    "courses/create" => [
+        "filename" => "resources/views/api/create/courses/index"
+    ],
+
+    "courses/[0-9]+/delete" => [
+        "filename" => "api/delete/courses/index"
+    ],
+
+    "courses/[0-9]+/update" => [
+        "filename" => "resources/views/api/update/courses/index"
+    ],
+
+    "courses/[0-9]+" => [
+        "filename" => "resources/views/api/view/courses/index"
     ],
 
 ];

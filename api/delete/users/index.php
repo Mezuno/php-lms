@@ -3,13 +3,12 @@
 $uri = $_SERVER['REQUEST_URI'];
 $parseUri = explode('/', $uri);
 
-$_POST['id'] = $parseUri[2];;
+$_POST['id'] = $parseUri[2];
 
 session_start();
 
 require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 require_once $connect_db_link;
-$error = false;
 
 $list = $_SESSION['list'];
 

@@ -18,6 +18,8 @@ $logout_link =                          '/includes/logout.php';
 $table_header_html_link =               $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-header-html.php';
 $table_html_link =                      $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-html.php';
 $pagination_html_link =                 $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/pagination-html.php';
+$table_courses_header_html_link =       $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-courses-header-html.php';
+$table_courses_html_link =              $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/table-courses-html.php';
 
 // ---- FUNCTIONS -------------------------------------------------------
 
@@ -27,17 +29,24 @@ $get_user_data_by_id_function_link =    $_SERVER['DOCUMENT_ROOT'].'/functions/ge
 $login_user_function_link =             $_SERVER['DOCUMENT_ROOT'].'/functions/login-user-function.php';
 $start_route_function_link =            $_SERVER['DOCUMENT_ROOT'].'/functions/start-route-function.php';
 $get_user_avatar_url_function_link =    $_SERVER['DOCUMENT_ROOT'].'/functions/get-user-avatar-url-function.php';
+$check_course_owner_link =              $_SERVER['DOCUMENT_ROOT'].'/functions/check-course-owner.php';
+$check_auth_link =                      $_SERVER['DOCUMENT_ROOT'].'/functions/check-auth.php';
 
-// ---- CRUD -------------------------------------------------------------
+// ---- CRUD USERS -------------------------------------------------------
 
 // -- create
+$create_user_form_link =                '/resources/views/api/create/users/';
+$create_user_link =                     $_SERVER['DOCUMENT_ROOT'].'/api/create/users/index.php';
+$create_n_users_form_link =             '/resources/views/api/create/users/index-n.php';
+$create_n_users_link =                  $_SERVER['DOCUMENT_ROOT'].'/api/create/users/create-n-users.php';
+$update_user_form_link =                '/resources/views/api/create/users/';
+$update_user_link =                     $_SERVER['DOCUMENT_ROOT'].'/api/update/users/index.php';
+$delete_user_link =                     $_SERVER['DOCUMENT_ROOT'].'/api/delete/users/index.php';
 
-// создать только из таблицы -----------!!!!!!!!!!!!!!!!!!!!!-------------
-$create_user_form_link =                '/api/create/users/';
-$create_user_link =                     '/api/create/users/create-user.php';
-
-$create_n_users_link =                  '/api/create/users/create-n-users.php';
-$create_n_users_form_link =             '/users/create/n';
+// -- CRUD COURSES ---------------------------------------------------------
+$update_course_link =                   $_SERVER['DOCUMENT_ROOT'].'/api/update/courses/index.php';
+$create_course_link =                   $_SERVER['DOCUMENT_ROOT'].'/api/create/courses/index.php';
+$view_course_link =                     $_SERVER['DOCUMENT_ROOT'].'/api/view/courses/index.php';
 
 // ---- CSS ----------------------------------------------------------------
 
