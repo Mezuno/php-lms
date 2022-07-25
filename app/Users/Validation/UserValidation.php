@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Users\Validation;
+namespace app\Users\Validation;
 
-use App\Users\Models\User as User;
+use app\Users\Models\User as User;
 
 class UserValidation
 {

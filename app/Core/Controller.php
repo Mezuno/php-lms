@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace app\Core;
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/View.php';
 

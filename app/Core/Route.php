@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core;
+namespace app\Core;
 
-use App\Users\Controllers\UserController as UserController;
+use app\Users\Controllers\UserController as UserController;
 
 class Route
 {
@@ -21,7 +21,7 @@ class Route
 
     public function startRoute($allRoutes)
     {
-        preg_match('/users\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
+        preg_match('/(\w+)\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
 
         //creating regex for matching uri and route from routes.php with preg_match
         foreach ($allRoutes as $route => $params) {
@@ -41,8 +41,8 @@ class Route
 
             $actionName = $this->routeParams['action'];
 
-            if (isset($matches[1])) {
-                $controller->$actionName($matches[1]);
+            if (isset($matches[2])) {
+                $controller->$actionName($matches[2]);
             } else {
                 $controller->$actionName();
             }

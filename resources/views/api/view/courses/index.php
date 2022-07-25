@@ -1,11 +1,11 @@
 <?php
 
-session_start();
+$courseData = $dataFromServer['courseData'][0];
+$authUserData = $dataFromServer['authUserData'];
 
 require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
-require $view_course_link;
 
-$pageName = 'Курс '.$courseDataFromDB['title_course'];
+$pageName = 'Курс';
 require $header_link;
 include $cookie_error_link;
 
@@ -13,8 +13,8 @@ include $cookie_error_link;
 
 <div class="bg-w80p-mt70 p20 brd-rd6">
 
-    <div class="mb20"><?= $courseDataFromDB['title_course'].' by' ?>
-    <?= $courseDataFromDB['login'].'<br>' ?></div>
+    <div class="mb20"><?= $courseData['course_title'].' by' ?>
+    <?= $courseData['user_login'].'<br>' ?></div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/jfKfPfyJRdk"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
