@@ -5,9 +5,8 @@
     <td class="td-userdata"><b>Login</b></td>
     <td class="td-userdata"><b>Role</b></td>
     <td class="td-userdata">
-        <?php if (isset($_SESSION['token']) && $authUserData['id_role'] == 1): ?>
+        <?php if (isset($_SESSION['user_token']) && $authUserData['role_id'] == 1): ?>
             <a href="/users/create" class="add-button"><i class="fa-solid fa-plus"></i></a>
-            <a href="<?= $create_n_users_form_link ?>" class="add-button"><i class="fa-solid fa-plus"></i> N</a>
         <?php endif ?>
     </td>
 </tr>

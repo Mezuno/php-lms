@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 
 ?>
 
-<div class="m20 p20-bg-rnd-container">
+<div class="m20 p20-bg-rnd-container bg-w80p-mt70">
     <p class="error404__title mb20">
         Ошибка 404
     </p>
