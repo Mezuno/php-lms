@@ -14,7 +14,7 @@ $entity = $paginationEntity;
 	if ($entity == 'courses') {
 		$userId = $authUserData['id'];
 		$itemsCountResult = $db->query("SELECT count(*) FROM $entity WHERE `deleted_at_course` IS NULL
-	AND author_course = $userId");
+		AND author_course = $userId");
 
 	}
 // }

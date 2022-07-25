@@ -1,15 +1,12 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
-require $connect_db_link;
-require_once $verify_function_link;
-require_once $get_auth_user_data_link;
-require_once $get_user_data_by_id_function_link;
-require_once $check_access_admin_link;
-require_once $create_user_link;
+$authUserData = $dataFromServer['authUserData'];
+$inputData = $dataFromServer['inputData'] ?? [];
+$createErrors = $dataFromServer['createErrors'] ?? [];
+$createSuccess = $dataFromServer['createSuccess'] ?? [];
 
 $pageName = 'Создание пользователя';
-require_once $header_link;
+require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 
 ?>
 
@@ -17,23 +14,23 @@ require_once $header_link;
 
     <div class="p20-bg-rnd-container flex-col">
         <form class="create-form" action="#" method="post">
-            <input type="text" value="<?= $_POST['login'] ?>" name="login" placeholder="Login" autocomplete="off" required><br>
-            <input type="email" value="<?= $_POST['email'] ?>" name="email" placeholder="E-mail" autocomplete="off" required><br>
-            <input type="password" name="password" placeholder="Password" autocomplete="off" required><br>
-            <input type="password" name="passwordRepeat" placeholder="Password" autocomplete="off" required><br>
-            <input type="number" value="<?= $_POST['role'] ?>" name="role" placeholder="Role" autocomplete="off" required><br>
+            <input type="text" value="<?= $inputData['login'] ?? '' ?>" name="login" placeholder="Login" autocomplete="off"><br>
+            <input type="email" value="<?= $inputData['email'] ?? '' ?>" name="email" placeholder="E-mail" autocomplete="off"><br>
+            <input type="password" name="password" placeholder="Password" autocomplete="off"><br>
+            <input type="password" name="passwordRepeat" placeholder="Password" autocomplete="off"><br>
+            <input type="number" value="<?= $inputData['role'] ?? '' ?>" name="role" placeholder="Role" autocomplete="off"><br>
             <input type="submit" name="submit" class="rounded-button" value="Добавить">
         </form>
 
-        <?php if (isset($createSuccess)):?>
+        <?php if (!empty($createErrors) || $createSuccess):?>
             <div class="notification">
-                <?php if (!$createSuccess): ?>
+                <?php if (!$createSuccess): foreach ($createErrors as $key => $value) {?>
                     <div class="red p8 fading">
-                        <?= $errorString ?>
+                        <?= $value ?>
                     </div>
-                <?php elseif($createSuccess): ?>
+                <?php } elseif($createSuccess): ?>
                     <div class="green p8 fading">
-                        Пользователь <?= $login ?> успешно создан!
+                        Пользователь <?= $inputData['login'] ?> успешно создан!
                     </div>
                 <?php endif ?>
             </div>

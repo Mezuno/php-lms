@@ -102,6 +102,7 @@ body {
 	padding: 20px;
 	border-radius: 10px;
 	background-color: #161b22;
+	position: relative;
 }
 
 .bg-w80p-mt70 {
@@ -275,9 +276,6 @@ tr:nth-child(1) {
 tr:last-child {
 	border-radius: 0 0 6px 6px;
 	border-bottom: 0px;
-}
-tr:nth-child(2n) {
-	/* background-color: rgba(24,36,48,0.9); */
 }
 tr:nth-child(2n) button {
 	background-color: rgba(0,0,0,0);
@@ -594,9 +592,6 @@ a.logo-link {
 }
 .error404__title {
 	font-size: 40px;
-}
-.error404__description {
-	
 }
 
 .delete-modal {

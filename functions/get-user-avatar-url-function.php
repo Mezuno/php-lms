@@ -4,11 +4,11 @@ function getAvatarUrlById($id, &$db) {
 
     $avatarsPath = '/resources/img/users/profile/avatar/';
 
-    $sql = "SELECT avatar_filename FROM users WHERE id = ?";
+    $sql = "SELECT `user_avatar_filename` FROM users WHERE `user_id` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$id]);
 
     $userAvatarPathData = $stmt->fetch();
 
-    return $avatarsPath.$userAvatarPathData['avatar_filename'];
+    return $avatarsPath.$userAvatarPathData['user_avatar_filename'];
 }

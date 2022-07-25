@@ -30,9 +30,12 @@
 		<?php
 
 			$i = 1;
-			while ($i < 5) {
+			while ($i <= 5) {
 				if ($_SESSION['list']+$i < $entityCount['count(*)'] / $paginationStep) {
-					echo '<a href="/' . $entity . '/list/' . $_SESSION['list']+$i  . '">' . $_SESSION['list']+$i . '</a>';
+					echo '<a href="/users?page=' . $_SESSION['list']+$i  . '">' . $_SESSION['list']+$i . '</a>';
+				}
+				if ($i == 5) {
+					echo '<a href="/users?page=' . $_SESSION['list']+5 . '">...</a>';
 				}
 				$i++;
 			}
@@ -40,7 +43,6 @@
 		?>
 
 		<?php if ($_SESSION['list']+5 < $entityCount['count(*)'] / $paginationStep): ?>
-			<a href="/<?= $entity ?>/list/<?= $_SESSION['list']+5 ?>">...</a>
 		<?php endif ?>
 
 		<?php if (($_SESSION['list'] != ceil($entityCount['count(*)'] / $paginationStep))): ?>

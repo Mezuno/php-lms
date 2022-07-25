@@ -1,6 +1,5 @@
 
 <tr>
-
     <td class="td-userdata">
         <?php if($userData['avatar_filename'] != NULL && file_exists($_SERVER['DOCUMENT_ROOT'].getAvatarUrlById($userData['id'], $db))): ?>
             <a href="/users/<?= $userData['id']?>">
