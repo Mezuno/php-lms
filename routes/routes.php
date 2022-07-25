@@ -52,6 +52,21 @@ return [
         'action' => 'showProfile'
     ],
 
+    'users/(\d+)/update/avatar' => [
+        'controller' => 'User',
+        'action' => 'changeAvatar'
+    ],
+
+    'courses' => [
+        'controller' => 'Course',
+        'action' => 'indexAction'
+    ],
+
+    'courses/(\d+)' => [
+        'controller' => 'Course',
+        'action' => 'showCourse'
+    ],
+
 ];
 
 

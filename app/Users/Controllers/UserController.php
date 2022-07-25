@@ -1,21 +1,13 @@
 <?php
 
-namespace App\Users\Controllers;
+namespace app\Users\Controllers;
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/Controller.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Users/Models/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/View.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/Traits/ValidData.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Users/Models/Authorization.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Users/Validation/UserValidation.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/Helpers/Pagination.php';
-
-use App\Core\Controller as Controller;
-use App\Users\Models\User as User;
-use App\Core\View as View;
-use App\Users\Models\Authorization as Authorization;
-use App\Users\Validation\UserValidation as UserValidation;
-use App\Core\Helpers\Pagination as Pagination;
+use app\Core\Controller as Controller;
+use app\Users\Models\User as User;
+use app\Core\View as View;
+use app\Users\Models\Authorization as Authorization;
+use app\Users\Validation\UserValidation as UserValidation;
+use app\Core\Helpers\Pagination as Pagination;
 
 class UserController extends Controller
 {
@@ -58,7 +50,6 @@ class UserController extends Controller
     
     public function createAction()
     {
-
         if (!$this->authModel->checkAuth()) {
             $this->authModel->redirectToLogin();
         }
@@ -125,7 +116,6 @@ class UserController extends Controller
             }
         }
 
-
         View::render('api/create/users/index', [
             'authUserData' => $this->authUserData[0],
         ]);
@@ -178,11 +168,9 @@ class UserController extends Controller
                 $result = $this->userModel->updateUser($this->inputData['login'], $this->inputData['email'], $this->inputData['password'], $id);
             }
 
-
             if (!$this->formErrors) {
                 $this->success = true;
             }
-
         }
 
         View::render('api/update/users/index', [
@@ -203,7 +191,6 @@ class UserController extends Controller
             $this->authUserData = $this->authModel->getAuthUserData();
         }
 
-
         if ($this->authModel->checkAdmin()) {
 
             $userData = $this->userModel->getUser($id);
@@ -212,8 +199,7 @@ class UserController extends Controller
                 $deleteResult = $this->userModel->deleteUser($id);  
             } else {
                 setcookie('error', 'Незя удалить другого админа ;(', time()+1, '/');
-            }
-            
+            } 
  
         } else {
             setcookie('error', 'Ты не админ куда ты лезешь?', time()+1, '/');
@@ -229,8 +215,6 @@ class UserController extends Controller
 
     public function loginAction()
     {
-        $authErrors = [];
-
         if ($this->authModel->checkAuth()) {
             header('Location: /users');
             die;
@@ -243,25 +227,25 @@ class UserController extends Controller
         }
 
         if (!isset($login)) {
-            array_push($authErrors, 'Введите логин');
+            array_push($this->formErrors, 'Введите логин');
         }
         if (!isset($password)) {
-            array_push($authErrors, 'Введите пароль');
+            array_push($this->formErrors, 'Введите пароль');
         }
 
         if (isset($submit)) {
 
             if (empty($login)) {
-                array_push($authErrors, 'Введите логин');
+                array_push($this->formErrors, 'Введите логин');
             }
             if (empty($password)) {
-                array_push($authErrors, 'Введите пароль');
+                array_push($this->formErrors, 'Введите пароль');
             }
 
-            if ($authErrors != []) {
+            if ($this->formErrors != []) {
 
                 View::render('login', [
-                    'authErrors' => $authErrors,
+                    'authErrors' => $this->formErrors,
                     'inputData' => [
                         'login' => $login,
                         'password' => $password
@@ -272,15 +256,12 @@ class UserController extends Controller
 
                 $password = md5(md5($password.'yalublulipton'));
 
-                $authUserModel = new Authorization();
-                
-
-                $userTokenAndId = $authUserModel->authUser($login, $password);
+                $userTokenAndId = $this->authModel->authUser($login, $password);
 
                 if (!$userTokenAndId) {
-                    array_push($authErrors, 'Неверный логин или пароль');
+                    array_push($this->formErrors, 'Неверный логин или пароль');
                     View::render('login', [
-                        'authErrors' => $authErrors,
+                        'authErrors' => $this->formErrors,
                         'inputData' => [
                             'login' => $login,
                         ]
@@ -350,9 +331,7 @@ class UserController extends Controller
                 ]);
             }
 
-            $inputData['password'] = md5(md5($inputData['password'].'yalublulipton'));
-
-            
+            $inputData['password'] = md5(md5($inputData['password'].'yalublulipton')); 
 
             $regResult = $this->userModel->registerUser($inputData['login'], $inputData['email'], $inputData['password']);
 
@@ -370,25 +349,96 @@ class UserController extends Controller
             }
         }
 
-
         View::render('register');
     }
 
     public function showProfile($id)
     {
-
-        if (!$this->authModel->checkAuth()) {
-            $this->authModel->redirectToLogin();
-        }
-
-        if ($this->authUserData[0]['user_id'] !== (int)$id) {
-            if (!$this->authModel->checkAdmin()) {
-                $this->authModel->redirectToUsers();
-            }
-        }
-
         $userData = $this->userModel->getUser($id);
 
-        View::render('profile', ['userData' => $userData, 'authUserData' => $this->authUserData]);
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            if (!$this->authModel->checkAuth()) {
+                $this->authModel->redirectToLogin();
+            }
+
+            if ($this->authUserData[0]['user_id'] !== (int)$id) {
+                if (!$this->authModel->checkAdmin()) {
+                    $this->authModel->redirectToUsers();
+                }
+            }
+
+
+            View::render('profile', ['userData' => $userData, 'authUserData' => $this->authUserData]);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $path = $_SERVER['DOCUMENT_ROOT'].'/resources/img/users/profile/avatar/';
+
+            $allow = ['png', 'jpg', 'jpeg'];
+
+            $inputName = 'avatar';
+
+            if (isset($_FILES[$inputName])) {
+                $name = $_FILES['avatar']['name'];
+
+                $parts = pathinfo($name);
+    
+                if (empty($name) || empty($parts['extension'])) {
+                    $error = 'Недопустимый тип файла';
+                }
+                if (!empty($allow) && !in_array(strtolower($parts['extension']), $allow)) {
+                    $error = 'Недопустимый тип файла';
+                }
+                if (mime_content_type($_FILES[$inputName]['tmp_name']) != 'image/jpeg'
+                && mime_content_type($_FILES[$inputName]['tmp_name']) != 'image/jpg'
+                && mime_content_type($_FILES[$inputName]['tmp_name']) != 'image/png') {
+                    $error = 'Недопустимый тип файла';
+                } 
+                if(empty($error)) {
+                    
+                    $i = 0;
+                    $prefix = '';
+                    while (is_file($path . $parts['filename'] . $prefix . '.' . $parts['extension'])) {
+                        $prefix = '(' . ++$i . ')';
+                    }
+                    $name = $parts['filename'] . $prefix . '.' . $parts['extension'];				
+                }
+
+                //$oldAvatarPath = $db->query("SELECT avatar_filename FROM users WHERE avatar_filename IS NOT NULL AND id = '".$this->authUserData['id']."'")->fetch();
+
+                if (move_uploaded_file($_FILES[$inputName]['tmp_name'], $path . $name)) {
+                    $success = 'Фото успешно обновлено.';
+                } else {
+                    $error = 'Не удалось загрузить файл.';
+                }
+
+                if (!empty($success)) {
+
+                    if (file_exists($path.md5($this->authUserData[0]['user_id']).'.png'))
+                    unlink($path.md5($this->authUserData[0]['user_id']).'.png');
+                    if (file_exists($path.md5($this->authUserData[0]['user_id']).'.jpeg'))
+                    unlink($path.md5($this->authUserData[0]['user_id']).'.jpeg');
+                    if (file_exists($path.md5($this->authUserData[0]['user_id']).'.jpg'))
+                    unlink($path.md5($this->authUserData[0]['user_id']).'.jpg');
+                    
+                    $avatarNameToUpload = md5($this->authUserData[0]['user_id']).'.'.$parts['extension'];
+                    rename($path.$name, $path.$avatarNameToUpload);
+
+                    $avatarPathToUpload = '/resources/img/users/profile/avatar/'.$avatarNameToUpload;
+
+                    $this->userModel->updateAvatarPath($id, $avatarPathToUpload);
+        
+                    setcookie('success', $success, time()+1, '/');
+
+                    header('Location: /users/'.$userData[0]['user_id']);
+                    // View::render('profile', ['userData' => $userData[0], 'authUserData' => $this->authUserData[0]]);
+                } else {
+                    setcookie('error', $error, time()+1, '/');
+                    header('Location: /users/'.$userData[0]['user_id']);
+                    // View::render('profile', ['userData' => $userData[0], 'authUserData' => $this->authUserData[0]]);
+                }
+            }
+        }
     }
 }

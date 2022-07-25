@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Users\Models;
+namespace app\Users\Models;
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/app/Core/Database.php';
-
-use App\Core\Database as Database;
+use app\Core\Database as Database;
 
 class User
 {
@@ -74,6 +72,10 @@ class User
 
     public function isExistsEmail($email) {
         return $this->dbConnect->select("SELECT `user_id` FROM new_schema.users WHERE `user_email` = ?", [$email]);
+    }
+
+    public function updateAvatarPath($id, $path) {
+        return $this->dbConnect->update("UPDATE users SET `user_avatar_filename` = ? WHERE `user_id` = ?", [$path, $id]);
     }
 
 }

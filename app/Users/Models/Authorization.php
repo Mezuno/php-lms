@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Users\Models;
+namespace app\Users\Models;
 
-use App\Core\Database as Database;
+use app\Core\Database as Database;
 
 class Authorization
 {

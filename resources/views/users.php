@@ -94,7 +94,15 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 			?>
 				<tr>
 					<td class="td-userdata">
-						<!-- сюда аву позже -->
+						<?php if($userData['user_avatar_filename'] != NULL && file_exists($_SERVER['DOCUMENT_ROOT'].$userData['user_avatar_filename'])): ?>
+							<a href="/users/<?= $userData['user_id']?>">
+								<img class="td-img" src="<?= $userData['user_avatar_filename'] ?>?v=<?= time() ?>" alt="">
+							</a>
+							<?php else: ?>
+							<a href="/users/<?= $userData['user_id']?>">
+								<img class="td-img" src="<?= $default_avatar_link ?>?v=<?= time() ?>" alt="">
+							</a>
+						<?php endif ?>
 					</td>
 
 					<td class="td-userdata"><?= $userData['user_id'] ?></td>
