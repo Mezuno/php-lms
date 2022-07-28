@@ -4,11 +4,9 @@ $coursesDataArray = $dataFromServer['coursesData'];
 $coursesCount = $dataFromServer['coursesCount'];
 $paginationInfo = $dataFromServer['paginationParams'];
 $authUserData = $dataFromServer['authUserData'];
+$pageName = $dataFromServer['pageName'];
 
-$pageName = 'Список курсов';
 require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
-
-include $cookie_error_link;
 
 ?>
 
@@ -34,7 +32,7 @@ include $cookie_error_link;
 			}
 		?>
 
-		<a class="green" href="/courses?limit=<?= $paginationInfo['limit'] ?>&page=<?= $paginationInfo['page'] ?>"><?= $paginationInfo['page'] ?></a>
+		<a class="current-page" href="/courses?limit=<?= $paginationInfo['limit'] ?>&page=<?= $paginationInfo['page'] ?>"><?= $paginationInfo['page'] ?></a>
 
 		<?php
 			for ($i = 1; $i <= 5; $i++) {
@@ -88,21 +86,48 @@ include $cookie_error_link;
 				<tr>
 					<td class="td-userdata"></td>
 					<td class="td-userdata"></td>
-					<td class="td-userdata"><a href="/courses/<?= $courseData['course_id']?>"><?= $courseData['course_title'] ?></a></td>
+					<td class="td-userdata"><a href="/courses/<?= $courseData['course_id']?>"><?= $courseData['course_title'] ?></a></td>	
 					<td class="td-userdata"><a href="/users/<?= $courseData['course_author']?>"><?= $courseData['user_login'] ?></a></td>
 					<td class="td-userdata"><b></b></td>
 					<td class="td-buttons">
 
-						<a class="action-button" href="/courses/<?= $courseData['course_id'] ?>/update"><i class="fa-solid fa-pen"></i></a>
+					<?php if ($authUserData['user_id'] == $courseData['course_author'] || $authUserData['role_title'] == 'Admin'): ?>
 
+					<a class="action-button" href="/courses/<?= $courseData['course_id'] ?>/update"><i class="fa-solid fa-pen"></i></a>
+
+						<?php if ($courseData['course_deleted_at'] != NULL): ?>
+						<a class="action-button yellow" onclick="
+							document.getElementById('recovery-modal-<?= $courseData['course_id'] ?>').style.display = 'flex'
+							">
+							<i class="fa-solid fa-arrow-rotate-right"></i>
+						</a>
+						<?php else: ?>
 						<a class="action-button red" onclick="
 							document.getElementById('delete-modal-<?= $courseData['course_id'] ?>').style.display = 'flex'
 							">
 							<i class="fa-solid fa-trash"></i>
 						</a>
+						<?php endif ?>
+
+					<?php endif ?>
 
 					</td> <!-- td-buttons end -->
 				</tr>
+
+				<?php if ($courseData['course_deleted_at'] != NULL &&
+				($courseData['course_author'] == $authUserData['user_id']
+				|| $authUserData['role_title'] == 'Admin')): ?>
+
+				<div class="recovery-modal" id="recovery-modal-<?= $courseData['course_id'] ?>">
+					<p class="recovery-modal-text mb20 mr20">Вы действительно хотите восстановить курс <?= $courseData['course_title'] ?>?</p>
+					<div class="flex-row">
+						<a href="/courses/<?= $courseData['course_id'] ?>/recovery" class="action-button mt20">Да</a>
+						<a onclick="document.getElementById('recovery-modal-<?= $courseData['course_id'] ?>').style.display = 'none'" class="action-button ml20 mt20">Нет</a>
+					</div>
+				</div>
+
+				<?php elseif (($courseData['course_author'] == $authUserData['user_id']
+				|| $authUserData['role_title'] == 'Admin')): ?>
 
 				<div class="delete-modal" id="delete-modal-<?= $courseData['course_id'] ?>">
 					<p class="delete-modal-text mb20 mr20">Вы действительно хотите удалить курс <?= $courseData['course_title'] ?>?</p>
@@ -111,6 +136,8 @@ include $cookie_error_link;
 						<a onclick="document.getElementById('delete-modal-<?= $courseData['course_id'] ?>').style.display = 'none'" class="action-button ml20 mt20">Нет</a>
 					</div>
 				</div>
+
+				<?php endif ?>
 
 			<?php
 		}

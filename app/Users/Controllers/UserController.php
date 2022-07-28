@@ -405,8 +405,6 @@ class UserController extends Controller
                     $name = $parts['filename'] . $prefix . '.' . $parts['extension'];				
                 }
 
-                //$oldAvatarPath = $db->query("SELECT avatar_filename FROM users WHERE avatar_filename IS NOT NULL AND id = '".$this->authUserData['id']."'")->fetch();
-
                 if (move_uploaded_file($_FILES[$inputName]['tmp_name'], $path . $name)) {
                     $success = 'Фото успешно обновлено.';
                 } else {
@@ -432,11 +430,11 @@ class UserController extends Controller
                     setcookie('success', $success, time()+1, '/');
 
                     header('Location: /users/'.$userData[0]['user_id']);
-                    // View::render('profile', ['userData' => $userData[0], 'authUserData' => $this->authUserData[0]]);
+                    die;
                 } else {
                     setcookie('error', $error, time()+1, '/');
                     header('Location: /users/'.$userData[0]['user_id']);
-                    // View::render('profile', ['userData' => $userData[0], 'authUserData' => $this->authUserData[0]]);
+                    die;
                 }
             }
         }

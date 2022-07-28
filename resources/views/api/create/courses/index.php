@@ -1,7 +1,9 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
-require $create_course_link;
+$authUserData = $dataFromServer['authUserData'];
+if (isset($dataFromServer['createErrors'])) {
+	$createErrors = $dataFromServer['createErrors'];
+}
 
 $pageName = 'Создание курса';
 require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
@@ -19,19 +21,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 	</form>
 
 
-	<?php if(isset($createSuccess)): ?>
-		<div class="notification">
-			<?php if (!$createSuccess): ?>
-				<div class="red p8 fading">
-					<?= $errorString ?>
-				</div>
-			<?php elseif($createSuccess): ?>
-				<div class="green p8 fading">
-					Курс успешно создан!
-				</div>
-			<?php endif ?>
-		</div>
-	<?php endif ?>
+	<?php if(isset($createErrors)) { ?>
+		<?php foreach ($createErrors as $key => $value) { ?>
+			<div class="red p8 fading notification">
+				<?= $value ?>
+			</div>
+	<?php } } ?>
+	
 		<a href="/courses" class="rounded-button"><i class="fa-solid fa-arrow-left"></i> Все курсы</a>
 	</div>
 </div>

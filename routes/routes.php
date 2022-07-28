@@ -59,12 +59,37 @@ return [
 
     'courses' => [
         'controller' => 'Course',
+        'action' => 'showOwn'
+    ],
+
+    'courses/catalog' => [
+        'controller' => 'Course',
         'action' => 'indexAction'
     ],
 
     'courses/(\d+)' => [
         'controller' => 'Course',
         'action' => 'showCourse'
+    ],
+
+    'courses/create' => [
+        'controller' => 'Course',
+        'action' => 'createCourse'
+    ],
+
+    'courses/(\d+)/update' => [
+        'controller' => 'Course',
+        'action' => 'updateCourse'
+    ],
+
+    'courses/(\d+)/delete' => [
+        'controller' => 'Course',
+        'action' => 'deleteCourse'
+    ],
+
+    'courses/(\d+)/recovery' => [
+        'controller' => 'Course',
+        'action' => 'recoveryCourse'
     ],
 
 ];

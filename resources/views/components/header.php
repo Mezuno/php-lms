@@ -37,6 +37,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/config/links.php';
 <?php if(isset($_SESSION['user_token'])): ?>
 <div class="navigation flex-column p20">
 	<div class="mb20"><a href="/users">Юзеры</a></div>
-	<div class="mb20"><a href="/courses">Курсы</a></div>
+	<div class="mb20"><a href="/courses/catalog">Курсы</a></div>
+	<div class="mb20"><a href="/courses">Мои курсы</a></div>
 </div>
 <?php endif ?>
