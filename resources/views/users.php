@@ -41,7 +41,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/resources/views/components/header.php';
 			}
 		?>
 
-		<a class="green" href="/users?limit=<?= $paginationInfo['limit'] ?>&page=<?= $paginationInfo['page'] ?>"><?= $paginationInfo['page'] ?></a>
+		<a class="current-page" href="/users?limit=<?= $paginationInfo['limit'] ?>&page=<?= $paginationInfo['page'] ?>"><?= $paginationInfo['page'] ?></a>
 
 		<?php
 			for ($i = 1; $i <= 5; $i++) {

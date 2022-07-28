@@ -39,12 +39,28 @@ img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /*--------------------*/
 
+/* DEBUG CSS */
+
+.debug {
+	position: relative;
+	z-index: 99999;
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	background-color: #660000;
+}
+
+/*  */
+
 .brd-rd6 { border-radius: 6px; }
 a { color: white; }
+.w600 {	width: 600px; }
 .w300 {	width: 300px; }
+.w250 {	width: 250px; }
 a:visited {	color: white; }
 .red { color: #c4302b !important; }
-.green { color:#2ea043; }
+.green { color:#2ea043 !important; }
+.yellow { color: #c4aa33 !important; }
 a.red {	color: #c4302b; }
 a.green { color:#2ea043; }
 .green { color: lightgreen; }
@@ -67,6 +83,7 @@ a.green { color:#2ea043; }
 .flex-alit-center { align-items: center; }
 .flex-just-center { justify-content: center; }
 .flex-row {	display: flex; }
+.flex-just-spbtw { justify-content: space-between; }
 
 @font-face {
 	src: url('../fonts/tahoma.ttf');
@@ -107,7 +124,9 @@ body {
 
 .bg-w80p-mt70 {
 	position: relative;
-	width: 70%;
+	width: fit-content;
+	min-width: 30%;
+	max-width: 70%;
 	background-color: #0d1117;
 	border: 1px solid #30363d;
 	margin: 70px auto 0;
@@ -203,6 +222,7 @@ button {
 	color: white;
 	transition: .4s;
 	border-radius: 6px;
+	background-color: rgba(24,36,48,0.5);
 }
 button:hover {
 	background-color: rgba(24,36,48,1);
@@ -352,7 +372,18 @@ a.add-button i {
 	font-size: 16px;
 }
 
-input {
+input, textarea {
+	border-radius: 6px;
+	padding: 10px 20px;
+	margin-right: 10px;
+	background-color: #0d1117;
+	color: white;
+	border: 1px solid #30363d;
+}
+
+
+select {
+	height: fit-content;
 	border-radius: 6px;
 	padding: 10px 20px;
 	margin-right: 10px;
@@ -473,8 +504,8 @@ input {
 .pagination a:hover {
 	background-color: #238636;
 }
-.pagination a.green {
-	color: white;
+.pagination a.current-page {
+	color: white !important;
 	background-color: #238636;
 }
 .list-lists a {
@@ -594,7 +625,7 @@ a.logo-link {
 	font-size: 40px;
 }
 
-.delete-modal {
+.delete-modal, .recovery-modal {
 	position: absolute;
 	z-index: 999;
 	top: 0;
@@ -611,7 +642,8 @@ a.logo-link {
 a.action-button {
 	color: #ccc;
 }
-.delete-modal .action-button {
+.delete-modal .action-button,
+.recovery-modal .action-button {
 	padding: 15px 20px;
 	color: white;
 	font-size: 20px;
@@ -670,4 +702,54 @@ a.action-button {
 }
 .search-button:hover {
 	background-color: rgba(255,255,255,0.1);
+}
+
+.add-field-to-course {
+	display: none;
+	padding: 20px;
+	margin-left: 20px;
+	background-color: #161b22;
+	border-radius: 10px;
+	flex: 0 0 auto;
+	border: 1px solid #30363d;
+	height: fit-content;
+	max-width: 350px;
+}
+
+.add-field-to-course-title {
+	font-size: 25px;
+	margin-left: 5px;
+	margin-bottom: 25px;
+}
+
+.add-field-to-course-description {
+	font-size: 12px;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+
+.add-field-to-course-textarea {
+	width: 300px;
+	max-height: 1000px;
+	height: 150px;
+	overflow: hidden;
+}
+::-webkit-scrollbar {
+	display: none;
+}
+
+.course__article {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.course__text {
+	line-height: 1.5;
+}
+.course__title-update {
+	width: 554px;
+}
+.course__content-update {
+	width: 500px;
+	height: 94px;
 }
